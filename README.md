@@ -33,11 +33,11 @@ If you want to contribute, please open an issue, create a pull request or ping u
 
 The core team which started this project:
 
-[Mahmoud Ismail](https://github.com/mahmoudgo)
-[Nico Kelling](https://github.com/nicokelling)
-[Daniel Gernert](https://github.com/DanielGernert)
-[Alexander Maier](https://github.com/alex-km)
-[Manuel Hollfelder](https://github.com/mhollfelder)
+* [Mahmoud Ismail](https://github.com/mahmoudgo)
+* [Nico Kelling](https://github.com/nicokelling)
+* [Daniel Gernert](https://github.com/DanielGernert)
+* [Alexander Maier](https://github.com/alex-km)
+* [Manuel Hollfelder](https://github.com/mhollfelder)
 
 ## Similar projects
 
