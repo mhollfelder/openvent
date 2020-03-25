@@ -2,10 +2,10 @@
   * [Bring me home...](README.md)
 
 * Get Started
-  * [Overview](/getstarted/getstarted.md)
-  * [QuickStart Hardware](/getstarted/hardwareSetup.md)
-  * [QuickStart Mechanics](/getstarted/softwareSetup.md)
-  * [QuickStart Software](/getstarted/SoftwareSetup.md)
+  * [Overview](getstarted/getstarted.md)
+  * [QuickStart Hardware](getstarted/hardwareSetup.md)
+  * [QuickStart Mechanics](getstarted/mechanicsSetup.md)
+  * [QuickStart Software](getstarted/softwareSetup.md)
 
 * Technical Concept
   * [System Overview](concept/systemOverview.md)
