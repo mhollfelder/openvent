@@ -27,19 +27,16 @@ docs/
 
 ## Disclaimer
 
-:warning: We would like to provide a warning and disclaimer here:
+:warning: We would like include a warning and disclaimer here:
 
 - The material and documentation here is provided with no warranties explicit or implied.
 - No material on this site is intended to provide medical advice. All designs are intended for investigational use only.
 - This site does not represent any official policies or procedures.
 
-The project is provided "as is", without warranty of any kind, express or implied, including but not limited to\
-the warranties of merchantability, fitness for a particular purpose and noninfringement.\
-In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether\
-in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use\
-or other dealings in the software.\
+The project is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement.\
+In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
-Only use this repository, designs, documentation or any provided information if you accept the above disclaimer.
+Only use **this repository, designs, documentation or any provided information** if you accept the above disclaimer.
 
 ## Project description
 
