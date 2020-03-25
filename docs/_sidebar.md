@@ -2,7 +2,7 @@
   * [Bring me home...](README.md)
 
 * Get Started
-  * [Overview](getstarted/getstarted.md)
+  * [Overview](getstarted/getStarted.md)
   * [QuickStart Hardware](getstarted/hardwareSetup.md)
   * [QuickStart Mechanics](getstarted/mechanicsSetup.md)
   * [QuickStart Software](getstarted/softwareSetup.md)
