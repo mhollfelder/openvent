@@ -1,5 +1,7 @@
 # System overview
 
+## System diagram
+
 An overview of the basic system components can be found in the following system diagram.
 The overall system is split into the following high-level blocks:
 
@@ -11,4 +13,14 @@ The overall system is split into the following high-level blocks:
 These overarching blocks are broken each broken down to sub-components.
 Currently, work and documentation is also split along these dimensions and blocks.
 
-![System overview](../../../assets/docs/assets/system_architecture_v101.svg)
+<img src="../../../assets/docs/assets/system_architecture_v101.svg" alt="System overview" width="80%"/>
+
+## Bill of Material (BOM) selection
+
+The BOM for the device depends on the respective prototype.\
+Please check out the respective prototype pages as well for more information.\
+
+The BOM of the latest prototype can be found here:
+
+//TBD
+
