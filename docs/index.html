@@ -7,15 +7,38 @@
   <meta name="description" content="Description">
   <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
+  <link rel="stylesheet"  href="//cdn.jsdelivr.net/npm/docsify-dark-mode@0.6.1/dist/style.css"/>
 </head>
 <body>
   <div id="app"></div>
   <script>
     window.$docsify = {
-      name: '',
-      repo: ''
+      name: 'OpenVent GitHub',
+      repo: 'https://github.com/mhollfelder/openvent/',
+      plugins: [
+        function(hook, vm) {
+          hook.beforeEach(function (html) {
+            var url = 'https://github.com/mhollfelder/openvent/blob/master/docs' + vm.router.getFile()
+            var editHtml = '[📝 Edit document on GitHub](' + url + ')\n'
+
+            return editHtml
+              + html
+              + '\n----\n'
+              + 'Last modified {docsify-updated} '
+              + editHtml
+          })
+        }
+      ],
+      darkMode: {
+        light: {
+          toggleBtnBg: '#42b983'
+        }
+      }
     }
   </script>
   <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <script src="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/index.min.js"></script>
 </body>
 </html>
