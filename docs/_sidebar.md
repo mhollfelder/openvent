@@ -1,11 +1,11 @@
 * :house: Home
-  * [Bring me home...](getstarted/overview.md)
+  * [Bring me home...](README.md)
 
 * Get Started
-  * [Overview](getstarted/overview.md)
-  * [QuickStart Hardware](getstarted/hardwareSetup.md)
-  * [QuickStart Mechanics](getstarted/softwareSetup.md)
-  * [QuickStart Software](getstarted/SoftwareSetup.md)
+  * [Overview](/getstarted/getstarted.md)
+  * [QuickStart Hardware](/getstarted/hardwareSetup.md)
+  * [QuickStart Mechanics](/getstarted/softwareSetup.md)
+  * [QuickStart Software](/getstarted/SoftwareSetup.md)
 
 * Technical Concept
   * [System Overview](concept/systemOverview.md)
@@ -16,23 +16,23 @@
   * [Medical Concept](concept/medicalConcept.md)
 
 * Hardware
-  * [Hardware](concept/usedHardware.md)
+  * [Hardware](hardware/usedHardware.md)
 
 * Software
   * [Embedded Software](software/embeddedSoftware.md)
 
 * Mechanics
-  * [Design Files](.\docs\mechanics\designFiles.md)
-  * [Mechanical Design](.\docs\mechanics\mechanicalDesign.md)
-  * [3D Printing](.\docs\mechanics\printDocumentation.md)
+  * [Design Files](mechanics/designFiles.md)
+  * [Mechanical Design](mechanics/mechanicalDesign.md)
+  * [3D Printing](mechanics/printDocumentation.md)
 
 * Prototype
   * [Overview](prototype/overview.md)
   * [Prototype V1](prototype/prototype1st.md)
 
 * Knowledge Hub
-  * [Existing Concepts](.\docs\knowledge\existingConcepts.md)
-  * [Other Projects](.\docs\knowledge\otherProjects.md)
+  * [Existing Concepts](knowledge/existingConcepts.md)
+  * [Other Projects](knowledge/otherProjects.md)
 
 * Development Workflow
   * [Used Tools]()
