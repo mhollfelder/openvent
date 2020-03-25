@@ -13,7 +13,7 @@ The overall system is split into the following high-level blocks:
 These overarching blocks are broken each broken down to sub-components.
 Currently, work and documentation is also split along these dimensions and blocks.
 
-<img src="../../../assets/docs/assets/system_architecture_v101.svg" alt="System overview" width="80%"/>
+<img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/system_architecture_v101.svg?sanitize=true" alt="System overview" width="80%"/>
 
 ## Bill of Material (BOM) selection
 
