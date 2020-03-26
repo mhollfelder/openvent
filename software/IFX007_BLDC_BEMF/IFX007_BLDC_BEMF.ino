@@ -10,18 +10,42 @@
 
 //Start up - Commutation-Counts to switch over to closed-loop
 
-#define OpenLoopToClosedLoopCount 50
-uint8_t Commutation = 0;
-uint8_t BEMF_phase = A1;
-uint8_t ClosedLoop = 0;
-uint8_t DutyCycle = 150;
-uint8_t Dir = 0;
-uint32_t V_neutral = 0;
+//#define OpenLoopToClosedLoopCount 50
+//uint8_t ClosedLoop = 0;
+//uint8_t BEMF_phase = A1;
 
 
 // the following should be moved to a library
 
 #include <Platform.h>
+
+
+#define DAC_MODE_PWM    (1u << 0)
+#define DAC_MODE_ANALOG (1u << 1)
+ 
+class IPwm
+{
+public:
+  virtual void configureOutput(uint32_t channel, uint8_t flags) = 0;
+  virtual void setOutput(uint32_t channel, uint32_t value) = 0;
+};
+
+class ArduinoPwm :
+  public IPwm
+{
+  void configureOutput(uint32_t channel, uint8_t flags)
+  {
+    pinMode(channel, OUTPUT);
+  }
+  void setOutput(uint32_t channel, uint32_t value)
+  {
+    analogWrite(channel, value);
+  }
+};
+
+ArduinoPwm Pwm;
+IPwm *defaultIPwm = &Pwm;
+
 
 typedef struct
 {
@@ -45,44 +69,64 @@ typedef struct
 class MotorController
 {
 public:
-  MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio = defaultIGpio, IAdc* adc = defaultIAdc);
+  MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio = defaultIGpio, IPwm* pwm = defaultIPwm, IAdc* adc = defaultIAdc);
   
   void updateVNeutral();
 
-
+  void setDirection(uint8_t direction)
+  {
+    m_direction = direction;
+  }
+  void setDutyCycle(uint8_t dutyCycle);
+  inline uint8_t getDutyCycle()
+  {
+    return m_dutyCycle;
+  }
+  void UpdateHardware(uint8_t CommutationStep);
   void DoCommutation();
-  void UpdateHardware(uint8_t CommutationStep, uint8_t Dir);
   
 private:
+  uint8_t m_direction;
+  uint8_t m_commutationStep;
+  uint8_t m_dutyCycle;
 
   const MotorControllerPinConfig_t &m_config;
   IGpio* m_gpio;
   IAdc* m_adc;
+  IPwm* m_pwm;
 
   uint32_t m_vNeutral;
 };
 
-MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio, IAdc* adc) :
+MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio, IPwm* pwm, IAdc* adc) :
   m_config {config},
   m_gpio {gpio},
-  m_adc {adc}
+  m_pwm {pwm},
+  m_adc {adc},
+  m_direction {0},
+  m_commutationStep {0},
+  m_dutyCycle {150}
 {
   m_gpio->configureGpio(m_config.enU, GPIO_MODE_OUTPUT_PUSH_PULL);
   m_gpio->configureGpio(m_config.enV, GPIO_MODE_OUTPUT_PUSH_PULL);
   m_gpio->configureGpio(m_config.enW, GPIO_MODE_OUTPUT_PUSH_PULL);
 
-    // analog out!
-  pinMode(m_config.pwmU, OUTPUT);
-  pinMode(m_config.pwmV, OUTPUT);
-  pinMode(m_config.pwmW, OUTPUT);
+  m_pwm->configureOutput(m_config.pwmU, DAC_MODE_PWM);
+  m_pwm->configureOutput(m_config.pwmV, DAC_MODE_PWM);
+  m_pwm->configureOutput(m_config.pwmW, DAC_MODE_PWM);
+}
+
+void MotorController::setDutyCycle(uint8_t dutyCycle)
+{
+  m_dutyCycle = dutyCycle;
 }
 
 void MotorController::updateVNeutral()
 {
-  m_vNeutral = (m_adc->getValue(m_config.adcVs) * DutyCycle) >> 8;
+  m_vNeutral = (m_adc->getValue(m_config.adcVs) * m_dutyCycle) >> 8;
 }
 
-  
+
 static const MotorControllerPinConfig_t mcConfig = {
   6, // .enU
   5, // .enV
@@ -115,14 +159,15 @@ void loop()
   while (i > 1000)
   {
     delayMicroseconds(i);
-    Commutation = CommStartup;
-    mc.UpdateHardware(CommStartup, 0);
+    mc.UpdateHardware(CommStartup);
     CommStartup++;
     if (CommStartup == 6)
       CommStartup = 0;
     i = i - 20;
   }
 
+  uint8_t DutyCycle = mc.getDutyCycle();
+  
   // main loop:
   while (1)
   {
@@ -135,6 +180,8 @@ void loop()
 
       if (in == 'd') Serial.println(DutyCycle, DEC);      //Show DutyCycle
       if (in == 'm') Serial.println(millis(), DEC);       //TimeStamp
+
+      mc.setDutyCycle(DutyCycle);
     }
   }
 }
@@ -142,22 +189,21 @@ void loop()
 void MotorController::DoCommutation()
 {
   updateVNeutral();
-  // V_neutral = m_adc->getValue(m_config.BEMF_phase);
+  // m_vNeutral = m_adc->getValue(m_config.BEMF_phase);
 
-  if (Dir == 0)
+  if (m_direction == 0)
   {
-    switch (Commutation)
+    switch (m_commutationStep)
     {
       case 0:
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfW) > V_neutral)
+          if (m_adc->getValue(m_config.bemfW) > m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfW) < V_neutral)
+        if (m_adc->getValue(m_config.bemfW) < m_vNeutral)
         {
-          Commutation = 1;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(1);
         }
         break;
 
@@ -165,13 +211,12 @@ void MotorController::DoCommutation()
 
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfV) < V_neutral)
+          if (m_adc->getValue(m_config.bemfV) < m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfV) > V_neutral)
+        if (m_adc->getValue(m_config.bemfV) > m_vNeutral)
         {
-          Commutation = 2;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(2);
         }
         break;
 
@@ -179,13 +224,12 @@ void MotorController::DoCommutation()
 
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfU) > V_neutral)
+          if (m_adc->getValue(m_config.bemfU) > m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfU) < V_neutral)
+        if (m_adc->getValue(m_config.bemfU) < m_vNeutral)
         {
-          Commutation = 3;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(3);
         }
         break;
 
@@ -193,13 +237,12 @@ void MotorController::DoCommutation()
 
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfW) < V_neutral)
+          if (m_adc->getValue(m_config.bemfW) < m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfW) > V_neutral)
+        if (m_adc->getValue(m_config.bemfW) > m_vNeutral)
         {
-          Commutation = 4;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(4);
         }
         break;
 
@@ -207,13 +250,12 @@ void MotorController::DoCommutation()
 
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfV) > V_neutral)
+          if (m_adc->getValue(m_config.bemfV) > m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfV) < V_neutral)
+        if (m_adc->getValue(m_config.bemfV) < m_vNeutral)
         {
-          Commutation = 5;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(5);
         }
         break;
 
@@ -221,13 +263,12 @@ void MotorController::DoCommutation()
 
         for (int i = 0; i < 20; i++)
         {
-          if (m_adc->getValue(m_config.bemfU) < V_neutral)
+          if (m_adc->getValue(m_config.bemfU) < m_vNeutral)
             i -= 1;
         }
-        if (m_adc->getValue(m_config.bemfU) > V_neutral)
+        if (m_adc->getValue(m_config.bemfU) > m_vNeutral)
         {
-          Commutation = 0;
-          UpdateHardware(Commutation, 0);
+          UpdateHardware(0);
         }
         break;
 
@@ -235,15 +276,20 @@ void MotorController::DoCommutation()
         break;
     }
   }
+  else
+  {
+    
+  }
 }
 
 //defining commutation steps according to HALL table
-void MotorController::UpdateHardware(uint8_t CommutationStep, uint8_t Dir)
+void MotorController::UpdateHardware(uint8_t CommutationStep)
 {
+  m_commutationStep = CommutationStep;
   updateVNeutral();
 
   //CW direction
-  if (Dir == 0)
+  if (m_direction == 0)
   {
 
     switch (CommutationStep)
@@ -252,54 +298,54 @@ void MotorController::UpdateHardware(uint8_t CommutationStep, uint8_t Dir)
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, LOW);
-        analogWrite(m_config.pwmU, DutyCycle);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 1:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, LOW);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, DutyCycle);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 2:
         m_gpio->setGpio(m_config.enU, LOW);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, DutyCycle);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 3:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, LOW);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, DutyCycle);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 4:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, LOW);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, DutyCycle);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 5:
         m_gpio->setGpio(m_config.enU, LOW);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, DutyCycle);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       default:
@@ -315,54 +361,54 @@ void MotorController::UpdateHardware(uint8_t CommutationStep, uint8_t Dir)
         m_gpio->setGpio(m_config.enU, LOW);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, DutyCycle);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 1:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, LOW);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, DutyCycle);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 2:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, LOW);
-        analogWrite(m_config.pwmU, DutyCycle);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       case 3:
         m_gpio->setGpio(m_config.enU, LOW);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, DutyCycle);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 4:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, LOW);
         m_gpio->setGpio(m_config.enW, HIGH);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, 0);
-        analogWrite(m_config.pwmW, DutyCycle);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, 0);
+        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 5:
         m_gpio->setGpio(m_config.enU, HIGH);
         m_gpio->setGpio(m_config.enV, HIGH);
         m_gpio->setGpio(m_config.enW, LOW);
-        analogWrite(m_config.pwmU, 0);
-        analogWrite(m_config.pwmV, DutyCycle);
-        analogWrite(m_config.pwmW, 0);
+        m_pwm->setOutput(m_config.pwmU, 0);
+        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
+        m_pwm->setOutput(m_config.pwmW, 0);
         break;
 
       default:
