@@ -20,7 +20,7 @@ class MotorStepper
 public:
   MotorStepper(const MotorStepperPinConfig_t &config, IGpio* gpio = defaultIGpio);
   
-  void setSpeed(float rpm)
+  inline void setSpeed(float rpm)
   {
     m_delay = microseconds_to_clock_ticks(1000000.f * 60 / rpm / m_config.steps /2); // rpm to (steps/ microseconds), /2 since we have a high and a low time per period
   }
@@ -103,17 +103,17 @@ void MotorStepper::runLoop()
       if (clock_has_passed(m_nextTimepoint))
       {
         // mutex
-        if (m_stepsToMake > 0)
-        {
-          setDirection(true);
-          m_stepsToMake--;
-          m_totalSteps++;
-        }
-        else
+        if (m_stepsToMake < 0)
         {
           setDirection(false);
           m_stepsToMake++;
           m_totalSteps--;
+        }
+        else
+        {
+          setDirection(true);
+          m_stepsToMake--;
+          m_totalSteps++;
         }
   
         outputStep();
@@ -139,7 +139,7 @@ MotorStepper ms(msConfig);
 
 const int rotationsPerBreath = 5;
 const int breathsPerMinute = 10;
-const int rpm = rotationsPerBreath * breathsPerMinute;
+const int rpm = 60 * rotationsPerBreath * breathsPerMinute;
 int upDown = -1;
 
 
