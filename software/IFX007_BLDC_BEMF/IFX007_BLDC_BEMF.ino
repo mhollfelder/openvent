@@ -20,33 +20,6 @@
 #include <Platform.h>
 
 
-#define DAC_MODE_PWM    (1u << 0)
-#define DAC_MODE_ANALOG (1u << 1)
- 
-class IPwm
-{
-public:
-  virtual void configureOutput(uint32_t channel, uint8_t flags) = 0;
-  virtual void setOutput(uint32_t channel, uint32_t value) = 0;
-};
-
-class ArduinoPwm :
-  public IPwm
-{
-  void configureOutput(uint32_t channel, uint8_t flags)
-  {
-    pinMode(channel, OUTPUT);
-  }
-  void setOutput(uint32_t channel, uint32_t value)
-  {
-    analogWrite(channel, value);
-  }
-};
-
-ArduinoPwm Pwm;
-IPwm *defaultIPwm = &Pwm;
-
-
 typedef struct
 {
   // digital output pins
@@ -69,7 +42,7 @@ typedef struct
 class MotorController
 {
 public:
-  MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio = defaultIGpio, IPwm* pwm = defaultIPwm, IAdc* adc = defaultIAdc);
+  MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio = defaultIGpio, IDac* dac = defaultIDac, IAdc* adc = defaultIAdc);
   
   inline void updateVNeutral();
 
@@ -92,16 +65,16 @@ private:
 
   const MotorControllerPinConfig_t &m_config;
   IGpio* m_gpio;
+  IDac* m_dac;
   IAdc* m_adc;
-  IPwm* m_pwm;
 
   uint32_t m_vNeutral;
 };
 
-MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio, IPwm* pwm, IAdc* adc) :
+MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio* gpio, IDac* dac, IAdc* adc) :
   m_config {config},
   m_gpio {gpio},
-  m_pwm {pwm},
+  m_dac {dac},
   m_adc {adc},
   m_direction {0},
   m_commutationStep {0},
@@ -111,9 +84,9 @@ MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio
   m_gpio->configureGpio(m_config.enV, GPIO_MODE_OUTPUT_PUSH_PULL);
   m_gpio->configureGpio(m_config.enW, GPIO_MODE_OUTPUT_PUSH_PULL);
 
-  m_pwm->configureOutput(m_config.pwmU, DAC_MODE_PWM);
-  m_pwm->configureOutput(m_config.pwmV, DAC_MODE_PWM);
-  m_pwm->configureOutput(m_config.pwmW, DAC_MODE_PWM);
+  m_dac->configureOutput(m_config.pwmU, DAC_MODE_PWM);
+  m_dac->configureOutput(m_config.pwmV, DAC_MODE_PWM);
+  m_dac->configureOutput(m_config.pwmW, DAC_MODE_PWM);
 }
 
 void MotorController::setDutyCycle(uint8_t dutyCycle)
@@ -297,54 +270,54 @@ void MotorController::UpdateHardware(uint8_t CommutationStep)
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, false);
-        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 1:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, false);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 2:
         m_gpio->setGpio(m_config.enU, false);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 3:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, false);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 4:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, false);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 5:
         m_gpio->setGpio(m_config.enU, false);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       default:
@@ -360,54 +333,54 @@ void MotorController::UpdateHardware(uint8_t CommutationStep)
         m_gpio->setGpio(m_config.enU, false);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 1:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, false);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 2:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, false);
-        m_pwm->setOutput(m_config.pwmU, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       case 3:
         m_gpio->setGpio(m_config.enU, false);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 4:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, false);
         m_gpio->setGpio(m_config.enW, true);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, 0);
-        m_pwm->setOutput(m_config.pwmW, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, 0);
+        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
         break;
 
       case 5:
         m_gpio->setGpio(m_config.enU, true);
         m_gpio->setGpio(m_config.enV, true);
         m_gpio->setGpio(m_config.enW, false);
-        m_pwm->setOutput(m_config.pwmU, 0);
-        m_pwm->setOutput(m_config.pwmV, m_dutyCycle);
-        m_pwm->setOutput(m_config.pwmW, 0);
+        m_dac->setOutput(m_config.pwmU, 0);
+        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+        m_dac->setOutput(m_config.pwmW, 0);
         break;
 
       default:
