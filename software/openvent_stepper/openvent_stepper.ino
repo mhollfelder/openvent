@@ -1,5 +1,4 @@
 
-
 // the following should be moved to a library
 
 #include <Platform.h>
@@ -137,15 +136,16 @@ static const MotorStepperPinConfig_t msConfig = {
 MotorStepper ms(msConfig);
 
 
-const int rotationsPerBreath = 5;
-const int breathsPerMinute = 10;
-const int rpm = 60 * rotationsPerBreath * breathsPerMinute;
+int rotationsPerBreath = 5;
+int breathsPerMinute = 10;
+int rpm;
 int upDown = -1;
 
 
 void setup() {
   // put your setup code here, to run once:
 
+  rpm = 60 * rotationsPerBreath * breathsPerMinute;
   ms.setSpeed(rpm);  
 
   Serial.begin(115200);
@@ -162,5 +162,57 @@ void loop() {
     ms.step(upDown * rotationsPerBreath * msConfig.steps);
   }
   
-  
+  serialHandler();
+}
+
+void serialHandler()
+{
+  if (Serial.available() > 1)
+  {
+    char buf[2];
+    buf[0] = Serial.read();
+    buf[1] = Serial.read();
+
+    switch (buf[0])
+    {
+      case 'r':
+        switch (buf[1])
+        {
+          case '+':
+            rotationsPerBreath++;
+            break;
+          case '-':
+            rotationsPerBreath--;
+            break;
+          default:
+            break;
+        }
+        break;
+      case 'b':
+        switch (buf[1])
+        {
+          case '+':
+            breathsPerMinute++;
+            break;
+          case '-':
+            breathsPerMinute--;
+            break;
+          default:
+            break;
+        }
+        break;
+      default:
+        break;
+    }
+
+    rpm = 60 * rotationsPerBreath * breathsPerMinute;
+    ms.setSpeed(rpm);  
+
+    Serial.print("Actual RPM: ");
+    Serial.println(rpm, DEC);
+    Serial.print("RotationsPerBreath: ");
+    Serial.println(rotationsPerBreath, DEC);
+    Serial.print("BreathsPerMinute: ");
+    Serial.println(breathsPerMinute, DEC);
+  }
 }

@@ -1,9 +1,3 @@
-////This example code is for sensorless BLDC motor control
-//Please be noticed it has to be modified for diffenrent motor
-
-
-
-//Start up - Commutation-Counts to switch over to closed-loop
 
 //#define OpenLoopToClosedLoopCount 50
 //uint8_t ClosedLoop = 0;
@@ -35,6 +29,7 @@ typedef struct
 
   uint32_t polePairs;
 } MotorControllerPinConfig_t;
+
 
 class MotorController
 {
@@ -120,18 +115,14 @@ static const MotorControllerPinConfig_t mcConfig = {
 
 MotorController mc(mcConfig);
 
+uint8_t DutyCycle;
 
 void setup()
 {
   // Setup the serial connection
   Serial.begin(115200);
-}
 
-void loop()
-{
   uint16_t i = 5000;
-
-
   // Startup procedure: start rotating the field slowly and increase the speed
   while (i > 1000)
   {
@@ -143,24 +134,49 @@ void loop()
     i = i - 20;
   }
 
-  uint8_t DutyCycle = mc.getDutyCycle();
-  
-  // main loop:
-  while (1)
+  DutyCycle = mc.getDutyCycle();
+
+}
+
+void loop()
+{
+  mc.runLoop();
+
+  serialHandler();
+}
+
+void serialHandler()
+{
+  if (Serial.available() > 1)
   {
-    mc.runLoop();
+    char buf[2];
+    buf[0] = Serial.read();
+    buf[1] = Serial.read();
 
-    while (Serial.available() > 0)
+    switch (buf[0])
     {
-      byte in = Serial.read();
-      if (in == '+' && (DutyCycle <= 250) ) DutyCycle += 5; //DutyCycle + 5
-      if (in == '-' && (DutyCycle >= 5)   ) DutyCycle -= 5; //DutyCycle - 5
-
-      if (in == 'd') Serial.println(DutyCycle, DEC);      //Show DutyCycle
-      if (in == 'm') Serial.println(millis(), DEC);       //TimeStamp
-
-      mc.setDutyCycle(DutyCycle);
+      case 'd':
+        switch (buf[1])
+        {
+          case '+':
+            if (DutyCycle <= 250) DutyCycle += 5;
+            break;
+          case '-':
+            if (DutyCycle >= 5) DutyCycle -= 5;
+            break;
+          default:
+            break;
+        }
+        mc.setDutyCycle(DutyCycle);
+        break;
+      default:
+        break;
     }
+
+    Serial.print("DutyCycle: ");
+    Serial.println(DutyCycle, DEC);
+    Serial.print("Actual RPM: ");
+    Serial.println(mc.m_actualRpm, 3);
   }
 }
 
@@ -284,13 +300,13 @@ void MotorController::runLoop()
     }
 
     m_deltaT = clock_elapsed_since(m_lastCommutation);
+
+    outputVoltage();
+    m_voltageSteps = voltageSteps;
     m_lastCommutation += m_deltaT;
 
     // use average or filter
     m_actualRpm = 60 * clock_ticks_per_sec / m_deltaT / 6 / m_config.polePairs;
-  
-    outputVoltage();
-    m_voltageSteps = voltageSteps;
   }
 }
 
