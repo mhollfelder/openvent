@@ -2,11 +2,6 @@
 //Please be noticed it has to be modified for diffenrent motor
 
 
-//Define Motor parameters
-#define MotorPoles 8
-#define HallPoleShift 0
-
-//PrintInfo
 
 //Start up - Commutation-Counts to switch over to closed-loop
 
@@ -37,6 +32,8 @@ typedef struct
   uint32_t bemfV;
   uint32_t bemfW;
   uint32_t adcVs;
+
+  uint32_t polePairs;
 } MotorControllerPinConfig_t;
 
 class MotorController
@@ -46,7 +43,7 @@ public:
   
   inline void updateVNeutral();
 
-  void setDirection(uint8_t direction)
+  void setDirection(bool direction)
   {
     m_direction = direction;
   }
@@ -55,13 +52,21 @@ public:
   {
     return m_dutyCycle;
   }
-  void UpdateHardware(uint8_t CommutationStep);
-  void DoCommutation();
-  
-private:
-  uint8_t m_direction;
-  uint8_t m_commutationStep;
+  void runLoop();
+
+//private:
+  constexpr static unsigned int voltageSteps = 20;
+  void outputVoltage();
+
+  float m_actualRpm;
+
+  int m_voltageSteps = voltageSteps;
+
+  bool m_direction;
   uint8_t m_dutyCycle;
+  uint8_t m_commutationStep;
+  clock_ticks_t m_lastCommutation;  
+  clock_ticks_t m_deltaT;
 
   const MotorControllerPinConfig_t &m_config;
   IGpio* m_gpio;
@@ -76,7 +81,7 @@ MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio
   m_gpio {gpio},
   m_dac {dac},
   m_adc {adc},
-  m_direction {0},
+  m_direction {false},
   m_commutationStep {0},
   m_dutyCycle {150}
 {
@@ -110,6 +115,7 @@ static const MotorControllerPinConfig_t mcConfig = {
   A2, // .bemfV
   A1, // .bemfW
   A0, // .adcVs
+  4, // .polePairs
 };
 
 MotorController mc(mcConfig);
@@ -124,16 +130,16 @@ void setup()
 void loop()
 {
   uint16_t i = 5000;
-  uint8_t CommStartup = 0;
+
 
   // Startup procedure: start rotating the field slowly and increase the speed
   while (i > 1000)
   {
     delayMicroseconds(i);
-    mc.UpdateHardware(CommStartup);
-    CommStartup++;
-    if (CommStartup == 6)
-      CommStartup = 0;
+    mc.outputVoltage();
+    mc.m_commutationStep++;
+    if (mc.m_commutationStep == 6)
+      mc.m_commutationStep = 0;
     i = i - 20;
   }
 
@@ -142,7 +148,7 @@ void loop()
   // main loop:
   while (1)
   {
-    mc.DoCommutation();
+    mc.runLoop();
 
     while (Serial.available() > 0)
     {
@@ -158,233 +164,190 @@ void loop()
   }
 }
 
-void MotorController::DoCommutation()
+void MotorController::runLoop()
 {
   updateVNeutral();
   // m_vNeutral = m_adc->getValue(m_config.BEMF_phase);
 
-  if (m_direction == 0)
+  if (!m_direction)
   {
     switch (m_commutationStep)
     {
       case 0:
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfW) > m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfW) < m_vNeutral)
         {
-          UpdateHardware(1);
+            m_voltageSteps--;
         }
         break;
-
       case 1:
-
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfV) < m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfV) > m_vNeutral)
         {
-          UpdateHardware(2);
+            m_voltageSteps--;
         }
         break;
-
       case 2:
-
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfU) > m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfU) < m_vNeutral)
         {
-          UpdateHardware(3);
+            m_voltageSteps--;
         }
         break;
-
       case 3:
-
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfW) < m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfW) > m_vNeutral)
         {
-          UpdateHardware(4);
+            m_voltageSteps--;
         }
         break;
-
       case 4:
-
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfV) > m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfV) < m_vNeutral)
         {
-          UpdateHardware(5);
+            m_voltageSteps--;
         }
         break;
-
       case 5:
-
-        for (int i = 0; i < 20; i++)
-        {
-          if (m_adc->getValue(m_config.bemfU) < m_vNeutral)
-            i -= 1;
-        }
         if (m_adc->getValue(m_config.bemfU) > m_vNeutral)
         {
-          UpdateHardware(0);
+            m_voltageSteps--;
         }
         break;
-
       default:
         break;
     }
   }
   else
   {
-    
+    switch (m_commutationStep)
+    {
+      case 0:
+        if (m_adc->getValue(m_config.bemfW) > m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      case 1:
+        if (m_adc->getValue(m_config.bemfV) < m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      case 2:
+        if (m_adc->getValue(m_config.bemfU) > m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      case 3:
+        if (m_adc->getValue(m_config.bemfW) < m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      case 4:
+        if (m_adc->getValue(m_config.bemfV) > m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      case 5:
+        if (m_adc->getValue(m_config.bemfU) < m_vNeutral)
+        {
+            m_voltageSteps--;
+        }
+        break;
+      default:
+        break;
+    }
+  }
+
+  if (m_voltageSteps == 0)
+  {
+    if (!m_direction)
+    {
+      if (m_commutationStep == 5)
+      {
+        m_commutationStep = 0;
+      }
+      else
+      {
+        m_commutationStep++;
+      }
+    }
+    else
+    {
+      if (m_commutationStep == 0)
+      {
+        m_commutationStep = 5;
+      }
+      else
+      {
+        m_commutationStep--;
+      }
+    }
+
+    m_deltaT = clock_elapsed_since(m_lastCommutation);
+    m_lastCommutation += m_deltaT;
+
+    // use average or filter
+    m_actualRpm = 60 * clock_ticks_per_sec / m_deltaT / 6 / m_config.polePairs;
+  
+    outputVoltage();
+    m_voltageSteps = voltageSteps;
   }
 }
 
-//defining commutation steps according to HALL table
-void MotorController::UpdateHardware(uint8_t CommutationStep)
+void MotorController::outputVoltage()
 {
-  m_commutationStep = CommutationStep;
-  updateVNeutral(); // why is this done here? it is only used in the other function...
-
-  //CW direction
-  if (m_direction == 0)
+  // check for direction and only switch the ones necessary
+  switch (m_commutationStep)
   {
-
-    switch (CommutationStep)
-    {
-      case 0:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, false);
-        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 1:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, false);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 2:
-        m_gpio->setGpio(m_config.enU, false);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 3:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, false);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 4:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, false);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
-        break;
-
-      case 5:
-        m_gpio->setGpio(m_config.enU, false);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
-        break;
-
-      default:
-        break;
-    }
-  }
-  else
-  {
-    //CCW direction
-    switch (CommutationStep)
-    {
-      case 0:
-        m_gpio->setGpio(m_config.enU, false);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 1:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, false);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 2:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, false);
-        m_dac->setOutput(m_config.pwmU, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      case 3:
-        m_gpio->setGpio(m_config.enU, false);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
-        break;
-
-      case 4:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, false);
-        m_gpio->setGpio(m_config.enW, true);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, 0);
-        m_dac->setOutput(m_config.pwmW, m_dutyCycle);
-        break;
-
-      case 5:
-        m_gpio->setGpio(m_config.enU, true);
-        m_gpio->setGpio(m_config.enV, true);
-        m_gpio->setGpio(m_config.enW, false);
-        m_dac->setOutput(m_config.pwmU, 0);
-        m_dac->setOutput(m_config.pwmV, m_dutyCycle);
-        m_dac->setOutput(m_config.pwmW, 0);
-        break;
-
-      default:
-        break;
-    }
+    case 0:
+      m_gpio->setGpio(m_config.enW, false);
+      m_dac->setOutput(m_config.pwmV, 0);
+      m_dac->setOutput(m_config.pwmW, 0);
+      m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+      m_gpio->setGpio(m_config.enU, true);
+      m_gpio->setGpio(m_config.enV, true);
+      break;
+    case 1:
+      m_gpio->setGpio(m_config.enV, false);
+      m_dac->setOutput(m_config.pwmV, 0);
+      m_dac->setOutput(m_config.pwmW, 0);
+      m_dac->setOutput(m_config.pwmU, m_dutyCycle);
+      m_gpio->setGpio(m_config.enU, true);
+      m_gpio->setGpio(m_config.enW, true);
+      break;
+    case 2:
+      m_gpio->setGpio(m_config.enU, false);
+      m_dac->setOutput(m_config.pwmU, 0);
+      m_dac->setOutput(m_config.pwmW, 0);
+      m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+      m_gpio->setGpio(m_config.enV, true);
+      m_gpio->setGpio(m_config.enW, true);
+      break;
+    case 3:
+      m_gpio->setGpio(m_config.enW, false);
+      m_dac->setOutput(m_config.pwmU, 0);
+      m_dac->setOutput(m_config.pwmW, 0);
+      m_dac->setOutput(m_config.pwmV, m_dutyCycle);
+      m_gpio->setGpio(m_config.enU, true);
+      m_gpio->setGpio(m_config.enV, true);
+      break;
+    case 4:
+      m_gpio->setGpio(m_config.enV, false);
+      m_dac->setOutput(m_config.pwmU, 0);
+      m_dac->setOutput(m_config.pwmV, 0);
+      m_dac->setOutput(m_config.pwmW, m_dutyCycle);
+      m_gpio->setGpio(m_config.enU, true);
+      m_gpio->setGpio(m_config.enW, true);
+      break;
+    case 5:
+      m_gpio->setGpio(m_config.enU, false);
+      m_dac->setOutput(m_config.pwmU, 0);
+      m_dac->setOutput(m_config.pwmV, 0);
+      m_dac->setOutput(m_config.pwmW, m_dutyCycle);
+      m_gpio->setGpio(m_config.enV, true);
+      m_gpio->setGpio(m_config.enW, true);
+      break;
+    default:
+      break;
   }
 }
