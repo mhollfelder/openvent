@@ -30,7 +30,7 @@ uint16_t ArduinoI2c::getI2cMaxTransfer()
 
 static sr_t i2cRead(uint8_t devAddr, uint16_t length, uint8_t buffer[])
 {
-	Wire.requestFrom(static_cast<int>(devAddr), length, true);
+	Wire.requestFrom(static_cast<int>(devAddr), length, 1);
 	while (Wire.available())
 	{
 		*buffer++ = Wire.read();

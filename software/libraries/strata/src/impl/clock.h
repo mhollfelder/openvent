@@ -4,10 +4,11 @@
 #include "Arduino.h"
 
 
-using clock_ticks_t = uint32_t;
+typedef uint32_t clock_ticks_t;
 
 static const clock_ticks_t clock_ticks_per_sec = 1000000;
 
+static const uint32_t diffThreshold = 1UL << (sizeof(clock_ticks_t) * 8 - 1);
 
 
 /**< \brief Converts clock ticks into milli seconds
@@ -69,7 +70,7 @@ static inline clock_ticks_t clock_elapsed_since(clock_ticks_t timepoint)
 static inline bool clock_has_passed(clock_ticks_t timepoint)
 {
     const clock_ticks_t diff = clock_now() - timepoint;
-    return diff < (1u << (sizeof(clock_ticks_t) * 8 - 1));
+    return diff < diffThreshold;
 }
 
 #endif /* CLOCK_H */

@@ -9,13 +9,12 @@
 
 #pragma once
 
-
 #include <chrono>
 #include <impl/clock.h>
 
 
 template <typename Rep, typename Period>
-inline sr_t delay(std::chrono::duration<Rep, Period> rel_time)
+inline void delay(std::chrono::duration<Rep, Period> rel_time)
 {
 	if (rel_time > std::chrono::microseconds(16383))
 	{

@@ -122,7 +122,7 @@ namespace stdext
         public buffer<T>
     {
     public:
-        buffer_aligned(size_t size) :
+        buffer_aligned(std::size_t size) :
             buffer<T>(size_aligned<T>(size))
         {}
     };

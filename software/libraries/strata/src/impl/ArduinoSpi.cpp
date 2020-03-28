@@ -32,7 +32,7 @@ static SPISettings* createSettings(unsigned int devId)
 {
 	for (unsigned int i = 0; i < PLATFORM_SPI_MAX_DEVICES; i++)
 	{
-		if ((boardSpiConfig[i].csPin == devId) || (boardSpiConfig[i].csPin == 0xFF))
+		if ((boardSpiConfig[i].csPin == devId) || (boardSpiConfig[i].csPin == 0xEE))
 		{
 			boardSpiConfig[i].csPin = devId;
 			return &m_settings[i];
@@ -127,8 +127,11 @@ sr_t ArduinoSpi::configureSpi(uint8_t devId, uint8_t flags, uint8_t wordSize, ui
 	
 	*dev = SPISettings(speed, lsbFirst?LSBFIRST:MSBFIRST, dataMode);
 
-	pinMode(csPin, OUTPUT);
-	digitalWrite(csPin, HIGH);
+	if (csPin < 0xD0)
+	{
+		pinMode(csPin, OUTPUT);
+		digitalWrite(csPin, HIGH);
+	}
 #endif
 }
 
@@ -151,14 +154,20 @@ static sr_t spiTransaction(uint8_t devId, uint32_t count, L& transfer)
 	const int csPin = devId;
 	
 	SPI.beginTransaction(*dev);
-	digitalWrite(csPin, LOW);
+	if (csPin < 0xD0)
+	{
+		digitalWrite(csPin, LOW);
+	}
 	
 	while (count--)
 	{
 		transfer();
 	}
 
-	digitalWrite(csPin, HIGH);
+	if (csPin < 0xD0)
+	{
+		digitalWrite(csPin, HIGH);
+	}
 	SPI.endTransaction();
 #endif
 }

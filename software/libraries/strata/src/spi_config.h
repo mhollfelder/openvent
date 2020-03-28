@@ -7,9 +7,9 @@
 // therefor create the look-up on the go and use csPin as devId
 
 BoardSpiConfig boardSpiConfig[PLATFORM_SPI_MAX_DEVICES] = {
-	{0xFF}, //.csPin
-	{0xFF}, //.csPin
-	{0xFF}, //.csPin
-	{0xFF}, //.csPin
+	{0xEE}, //.csPin
+	{0xEE}, //.csPin
+	{0xEE}, //.csPin
+	{0xEE}, //.csPin
 };
 
