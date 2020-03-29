@@ -43,4 +43,26 @@ As we aim in this work to address crucial need for supporting the high demand fo
    > * Monitor and report the CO2 concentration of exhaled air.
 
 ## Medical Requirements
-### Hygienic Requirements
+
+| Parameters    | Value or Range                                       | Comment                                      |
+|---------------|------------------------------------------------------|----------------------------------------------|
+| Modes         | Volume control <br> Pressure control <br> Assist control|                               |
+| Alarms        | Fails <br> pressure peaks <br> Lower tidal volume              | if the devices stops working <br> If the plateau pressure exceeds maximum allowed pressure (during volume control mode) <br> if the tidal volume is lower than minimum allowed tidal volume (during pressure control mode)|
+| Rate          | 8 - 40 <br> 10 - 40 breaths per minute      | Must be adjustable <br> in assist control, only if the patient cannot breath less than assigned rate  |
+| Tidal Volume  | 200 - 800 mL per ventilation | Must be adjustable |
+| PEEP          | 5 - 20 cmH2O per ventilation | Must be adjustable |
+| Inspiration to expiration rate | 1:2 - 1:4   | Must be adjustable |
+| Exhaled volume | record the expired volume   | Patients during assist control get part of the tidal volume from other channels such as the exhalation port |
+| Exhaled CO2 | measure expired CO2       | The exhaled CO2 is indicator: <br>  Tissular production of CO2 <br> CO2 transport in the venous system to the pulmonary arteries <br> CO2 elimination by the lungs |
+| FiO2  | 30-100%       | Ventilator needs to be connectable to Oxygen intake|
+
+
+Modes:
+- Assist control/ a.k.a continueous mandatory ventilation (AMV))
+- Volume control
+- Pressure control
+
+
+# References
+Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
+CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
