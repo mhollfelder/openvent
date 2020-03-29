@@ -68,6 +68,8 @@ public:
   IDac* m_dac;
   IAdc* m_adc;
 
+  const uint32_t m_steps;
+
   uint32_t m_vNeutral;
 };
 
@@ -78,7 +80,8 @@ MotorController::MotorController(const MotorControllerPinConfig_t &config, IGpio
   m_adc {adc},
   m_direction {false},
   m_commutationStep {0},
-  m_dutyCycle {150}
+  m_dutyCycle {150},
+  m_steps {m_config.polePairs * 6}
 {
   m_gpio->configureGpio(m_config.enU, GPIO_MODE_OUTPUT_PUSH_PULL);
   m_gpio->configureGpio(m_config.enV, GPIO_MODE_OUTPUT_PUSH_PULL);
@@ -306,7 +309,7 @@ void MotorController::runLoop()
     m_lastCommutation += m_deltaT;
 
     // use average or filter
-    m_actualRpm = 60 * clock_ticks_per_sec / m_deltaT / 6 / m_config.polePairs;
+    m_actualRpm = 60.0f * clock_ticks_per_sec / m_deltaT / m_steps;
   }
 }
 

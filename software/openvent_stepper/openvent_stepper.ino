@@ -45,6 +45,19 @@ public:
   {
     return m_totalSteps;
   }
+
+  void reset(bool modulo = false)
+  {
+    if (modulo)
+    {
+      const int32_t resetSteps = (-m_totalSteps + m_config.steps / 2) % m_config.steps - m_config.steps / 2;
+      step(resetSteps);
+    }
+    else
+    {
+      step(-m_totalSteps);
+    }
+  }
   
   void runLoop();
   
