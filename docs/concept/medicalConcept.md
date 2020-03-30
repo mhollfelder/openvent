@@ -3,6 +3,9 @@
 ## Introduction
 ### The Human Lung 
 
+<img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/upper_tract.svg?sanitize=true" alt="System overview" width="45%"/>
+<img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/uventilatory_system_weibel.svg?sanitize=true" alt="System overview" width="45%"/>
+
 A human lung is a complex organ responsible for gas exchange between the body and the environment. The lung is mainly composed of two types of airways (conductive and respiratory airways), alveoli, and blood vessels.
 
 - Conductive airways: The main role of the conductive airways is to transport the bulk of air from and into the lung. No gas exchange (perfusion) takes place in the conductive airways. This is why conductive airways are also called dead space.
