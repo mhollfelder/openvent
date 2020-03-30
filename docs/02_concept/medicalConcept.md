@@ -43,6 +43,23 @@ As we aim in this work to address crucial need for supporting the high demand fo
    > * Monitor and report the CO2 concentration of exhaled air.
 
 ## Medical Requirements
+### Parameters to be Recorded
+These parameters are to be shown on a monitor:
+| Parameters    | Value or Range (Tolerance)                           | Comment                                      |
+|---------------|------------------------------------------------------|----------------------------------------------|
+| PEEP          | 5 - 20 cmH2O (xx)                                    | Peak End Expiratory Pressure, is measured at the end of the respiration cycle|
+| V_T            | xx (xx)      | Tidal volume. Is the total volume pumped/inspired during the inhalation period  |
+| Respiratory rate <br> (RR) | 8 - 40/ min                             | |
+| P_peak          | up to 60 cmH2O (xx) | peak pressure (usually capped by the safety valve of the Ambu Bag) |
+| Inspiration to expiration rate | 1:2 - 1:4   | Must be adjustable |
+| P_plat       | up to 60cmH2O                                        | Plateau pressure (usually capped by the safety valve of the Ambu Bag) |
+| Exhaled volume | record the expired volume   | Patients during assist control get part of the tidal volume from other channels such as the exhalation port |
+| Exhaled CO2 | measure expired CO2       | The exhaled CO2 is indicator: <br>  Tissular production of CO2 <br> CO2 transport in the venous system to the pulmonary arteries <br> CO2 elimination by the lungs |
+| P_0.1           |                                                      | During assist control, the pressure generated 100ms after onset of inspiratory effort|
+| PTP/min           |                                                      | During assist control, Pressure Time Product per minute |
+
+
+### Parameters to be Controlled
 
 | Parameters    | Value or Range                                       | Comment                                      |
 |---------------|------------------------------------------------------|----------------------------------------------|
@@ -52,17 +69,17 @@ As we aim in this work to address crucial need for supporting the high demand fo
 | Tidal Volume  | 200 - 800 mL per ventilation | Must be adjustable |
 | PEEP          | 5 - 20 cmH2O per ventilation | Must be adjustable |
 | Inspiration to expiration rate | 1:2 - 1:4   | Must be adjustable |
-| Exhaled volume | record the expired volume   | Patients during assist control get part of the tidal volume from other channels such as the exhalation port |
-| Exhaled CO2 | measure expired CO2       | The exhaled CO2 is indicator: <br>  Tissular production of CO2 <br> CO2 transport in the venous system to the pulmonary arteries <br> CO2 elimination by the lungs |
 | FiO2  | 30-100%       | Ventilator needs to be connectable to Oxygen intake|
 
 
 Modes:
-- Assist control/ a.k.a continueous mandatory ventilation (AMV))
+- Assist control/ a.k.a continuous mandatory ventilation (AMV))
 - Volume control
 - Pressure control
 
 
 # References
+The Basics of respiratory mechanics: ventilator-derived parameters https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6212352/pdf/atm-06-19-376.pdf 
 Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
 CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
+
