@@ -4,7 +4,7 @@
 ### The Human Lung 
 
 <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/upper_tract.svg?sanitize=true" alt="System overview" width="45%"/>
-<img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/uventilatory_system_weibel.svg?sanitize=true" alt="System overview" width="45%"/>
+<img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/ventilatory_system_weibel.svg?sanitize=true" alt="System overview" width="45%"/>
 
 A human lung is a complex organ responsible for gas exchange between the body and the environment. The lung is mainly composed of two types of airways (conductive and respiratory airways), alveoli, and blood vessels.
 
