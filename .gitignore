@@ -1,0 +1,8 @@
+# Ignore everything
+/*
+
+# Allow .gitignore
+!.gitignore
+
+# Recursively allow files under ./docs for the documentation branch
+!/software/
