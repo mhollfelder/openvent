@@ -77,12 +77,15 @@ These parameters are to be shown on a monitor:
 
 Modes:
 - Assist control/ a.k.a continuous mandatory ventilation (AMV))
-- Volume control
-- Pressure control
+ <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Assist_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
+- Volume control
+ <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/volume_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
+- Pressure control
+ <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Pressure_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
 # References
-The Basics of respiratory mechanics: ventilator-derived parameters https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6212352/pdf/atm-06-19-376.pdf 
-Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
-CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
-
+- The Basics of respiratory mechanics: ventilator-derived parameters https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6212352/pdf/atm-06-19-376.pdf 
+- Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
+- CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
+- Reduced Dimensional Modeling of the Entire Human Lung https://mediatum.ub.tum.de/doc/1197313/1197313.pdf
