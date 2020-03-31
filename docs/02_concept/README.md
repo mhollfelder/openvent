@@ -1,4 +1,4 @@
-# System overview
+# :page_with_curl: System overview
 
 ## System diagram
 

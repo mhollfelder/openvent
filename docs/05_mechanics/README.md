@@ -1,4 +1,4 @@
-# :gear: Mechanics
+# :hammer_and_wrench: Mechanics
 
 We would like to provide here the main information of the mechanical setup and the overall mechanics concept.
 
