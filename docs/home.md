@@ -1,19 +1,9 @@
-# OpenVent project documentation
-
-## Basic structure
+# Homepage
 
 We are using [Docsify](https://docsify.js.org/) to generate this documentation on the fly from the Markdown files in `/docs` of the [repository](https://www.github.com/mhollfelder/openvent).\
 Basically, writing documentation means adding additional Markdown files plus modifying Docsify settings if required.
 
-The documentation can also be hosted locally by executing the following command from the repository root: 
-
-```console
-npm i docsify-cli -g
-cd ./docs
-docsify serve
-```
-
-Afterwards, you can visit the documentation here [http://localhost:3000](http://localhost:3000).
+The documentation here is served via Docsify and you are accessing the landing page.
 
 ## Folder and file structure
 
