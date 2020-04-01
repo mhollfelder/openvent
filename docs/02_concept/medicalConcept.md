@@ -46,42 +46,48 @@ As we aim in this work to address crucial need for supporting the high demand fo
    > * Monitor and report the CO2 concentration of exhaled air.
 
 ## Medical Requirements
+
 ### Parameters to be Recorded
 These parameters are to be shown on a monitor:
-| Parameters    | Value or Range (Tolerance)                           | Comment                                      |
-|---------------|------------------------------------------------------|----------------------------------------------|
-| PEEP          | 5 - 20 cmH2O (xx)                                    | Peak End Expiratory Pressure, is measured at the end of the respiration cycle|
-| V_T            | xx (xx)      | Tidal volume. Is the total volume pumped/inspired during the inhalation period  |
-| Respiratory rate <br> (RR) | 8 - 40/ min                             | |
-| P_peak          | up to 60 cmH2O (xx) | peak pressure (usually capped by the safety valve of the Ambu Bag) |
-| Inspiration to expiration rate | 1:2 - 1:4   | Must be adjustable |
-| P_plat       | up to 60cmH2O                                        | Plateau pressure (usually capped by the safety valve of the Ambu Bag) |
-| Exhaled volume | record the expired volume   | Patients during assist control get part of the tidal volume from other channels such as the exhalation port |
-| Exhaled CO2 | measure expired CO2       | The exhaled CO2 is indicator: <br>  Tissular production of CO2 <br> CO2 transport in the venous system to the pulmonary arteries <br> CO2 elimination by the lungs |
-| P_0.1           |                                                      | During assist control, the pressure generated 100ms after onset of inspiratory effort|
-| PTP/min           |                                                      | During assist control, Pressure Time Product per minute |
-
+| Parameters    | Value or Range (Tolerance)          | Comment                                    | must / nice to have|
+|---------------|-------------------------------------|--------------------------------------------|--------------------|
+| PEEP          | 5 - 20 cmH2O (xx)                   | Peak End Expiratory Pressure, is measured at the end of the respiration cycle| |
+| V_T           | xx (xx)                             | Tidal volume. Is the total volume pumped/inspired during the inhalation period  <br> 4–8 mL/kg predicted body weight (PBW)| |
+| Respiratory rate <br> (RR) | 8 - 40/ min            |                                            |                    |
+| P_peak        | up to 60 cmH2O (xx)                 | peak pressure (usually capped by the safety valve of the Ambu Bag) | |
+| P_plat        | up to 60cmH2O                       | Plateau pressure (usually capped by the safety valve of the Ambu Bag) | |
+| Exhaled volume | record the expired volume          | Patients during assist control get part of the tidal volume from other channels such as the exhalation port | |
+| Inhaled O2    |                                     |                                             |                   |
+| Exhaled CO2   | measure expired CO2                 | The exhaled CO2 is indicator: <br>  Tissular production of CO2 <br> CO2 transport in the venous system to the pulmonary arteries <br> CO2 elimination by the lungs          |                   |
+| P_0.1         |                                     | During assist control, the pressure generated 100ms after onset of inspiratory effort| | |
+| PTP/min       |                              | During assist control, Pressure Time Product per minute |  | 
+| monitor | Shows trends of the last 0.5 to 4h |                                                         |  | 
+| Memory  | Data should be stored 24h          |                                                         |  | 
 
 ### Parameters to be Controlled
 
 | Parameters    | Value or Range                                       | Comment                                      |
 |---------------|------------------------------------------------------|----------------------------------------------|
-| Modes         | Volume control <br> Pressure control <br> Assist control|                               |
+| Modes         | Volume control <br> Pressure control <br> Assist control| [to be confirmed]: Pressure control is the preferred treatment method for COVID-19                              |
 | Alarms        | Fails <br> pressure peaks <br> Lower tidal volume              | if the devices stops working <br> If the plateau pressure exceeds maximum allowed pressure (during volume control mode) <br> if the tidal volume is lower than minimum allowed tidal volume (during pressure control mode)|
-| Rate          | 8 - 40 <br> 10 - 40 breaths per minute      | Must be adjustable <br> in assist control, only if the patient cannot breath less than assigned rate  |
+| Rate          | 5 - 25 <br> 10 - 40 breaths per minute      | Must be adjustable <br> in assist control, only if the patient cannot breath less than assigned rate  |
 | Tidal Volume  | 200 - 800 mL per ventilation | Must be adjustable |
-| PEEP          | 5 - 20 cmH2O per ventilation | Must be adjustable |
+| PEEP          | 0 - 20 cmH2O per ventilation | Must be adjustable |
 | Inspiration to expiration rate | 1:2 - 1:4   | Must be adjustable |
+| Ventilator Pressure | 5-30 cmH2O             | Must be adjustable |
 | FiO2  | 30-100%       | Ventilator needs to be connectable to Oxygen intake|
 
 
-Modes:
-- Assist control/ a.k.a continuous mandatory ventilation (AMV))
+
+
+### Ventilation Modes:
+#### Assist Control/ a.k.a Continuous Mandatory Ventilation (CMV))
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Assist_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
-- Volume control
+#### Volume Control
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/volume_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
-- Pressure control
+
+#### Pressure Control
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Pressure_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
 # References
@@ -89,3 +95,4 @@ Modes:
 - Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
 - CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
 - Reduced Dimensional Modeling of the Entire Human Lung https://mediatum.ub.tum.de/doc/1197313/1197313.pdf
+- Should A Tidal Volume of 6 mL/kg Be Used in All Patients? http://rc.rcjournal.com/content/61/6/774
