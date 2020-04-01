@@ -51,10 +51,10 @@ As we aim in this work to address crucial need for supporting the high demand fo
 These parameters are to be shown on a monitor:
 | Parameters    | Value or Range (Tolerance)          | Comment                                    | must / nice to have|
 |---------------|-------------------------------------|--------------------------------------------|--------------------|
-| PEEP          | 5 - 20 cmH2O (xx)                   | Peak End Expiratory Pressure, is measured at the end of the respiration cycle| |
-| V_T           | xx (xx)                             | Tidal volume. Is the total volume pumped/inspired during the inhalation period  <br> 4–8 mL/kg predicted body weight (PBW)| |
-| Respiratory rate <br> (RR) | 8 - 40/ min            |                                            |                    |
-| P_peak        | up to 60 cmH2O (xx)                 | peak pressure (usually capped by the safety valve of the Ambu Bag) | |
+| PEEP          | 5 - 20 cmH2O (??)                   | Peak End Expiratory Pressure, is measured at the end of the respiration cycle| |
+| V_T           | 200-1200ml/s (??)                             | Tidal volume. Is the total volume pumped/inspired during the inhalation period  <br> 4–8 mL/kg predicted body weight (PBW)| |
+| Respiratory rate <br> (RR) | 5 - 25/ min            |                                            |                    |
+| P_peak        | up to 60 cmH2O (??)                 | peak pressure (usually capped by the safety valve of the Ambu Bag) | |
 | P_plat        | up to 60cmH2O                       | Plateau pressure (usually capped by the safety valve of the Ambu Bag) | |
 | Exhaled volume | record the expired volume          | Patients during assist control get part of the tidal volume from other channels such as the exhalation port | |
 | Inhaled O2    |                                     |                                             |                   |
