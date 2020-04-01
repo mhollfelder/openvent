@@ -52,7 +52,7 @@ These parameters are to be shown on a monitor:
 | Parameters    | Value or Range (Tolerance)          | Comment                                    | must / nice to have|
 |---------------|-------------------------------------|--------------------------------------------|--------------------|
 | PEEP          | 5 - 20 cmH2O (xx)                   | Peak End Expiratory Pressure, is measured at the end of the respiration cycle| |
-| V_T           | xx (xx)                             | Tidal volume. Is the total volume pumped/inspired during the inhalation period  | |
+| V_T           | xx (xx)                             | Tidal volume. Is the total volume pumped/inspired during the inhalation period  <br> 4–8 mL/kg predicted body weight (PBW)| |
 | Respiratory rate <br> (RR) | 8 - 40/ min            |                                            |                    |
 | P_peak        | up to 60 cmH2O (xx)                 | peak pressure (usually capped by the safety valve of the Ambu Bag) | |
 | P_plat        | up to 60cmH2O                       | Plateau pressure (usually capped by the safety valve of the Ambu Bag) | |
@@ -81,13 +81,13 @@ These parameters are to be shown on a monitor:
 
 
 ### Ventilation Modes:
-#### Assist control/ a.k.a continuous mandatory ventilation (AMV))
+#### Assist Control/ a.k.a Continuous Mandatory Ventilation (CMV))
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Assist_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
-#### Volume control
+#### Volume Control
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/volume_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
-#### Pressure control
+#### Pressure Control
  <p><img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/Pressure_control_mode.svg?sanitize=true" alt="System overview" height="600px"/><p>
 
 # References
@@ -95,3 +95,4 @@ These parameters are to be shown on a monitor:
 - Introduction to mechanical ventilation & ventilation modes https://www.youtube.com/watch?v=gk_Qf-JAL84
 - CO2 measurement at the mouth level https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3182669/
 - Reduced Dimensional Modeling of the Entire Human Lung https://mediatum.ub.tum.de/doc/1197313/1197313.pdf
+- Should A Tidal Volume of 6 mL/kg Be Used in All Patients? http://rc.rcjournal.com/content/61/6/774
