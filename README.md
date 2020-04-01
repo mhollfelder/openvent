@@ -43,4 +43,5 @@ The core team which started this project:
 
 ## Similar projects
 
-Here, we will add a list of similar projects which are worth being checked out.
+Here, is a list of similar projects which are worth being checked out.
+* [OpenLung] (https://gitlab.com/open-source-ventilator/OpenLung)
