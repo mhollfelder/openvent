@@ -1,5 +1,10 @@
 Copyright 2020 OpenVent Core Team
 
+For 3rd party files under a different license as part of this repository, this license shall not apply.
+All rights of the respective copyright holders and license givers are preserved and respected.
+
+If not stated otherwise, the following license applies to the files in this repository (default license):
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
