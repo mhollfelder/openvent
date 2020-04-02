@@ -1,12 +1,56 @@
-# Ignore everything
-/*
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
 
-# Allow .gitignore
-!.gitignore
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
 
-# Recursively allow files under ./docs for the documentation branch
-!/docs/
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
 
-# Regard LICENSE and README as part of the documentation
-!LICENSE.md
-!README.md
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files #
+#############
+nbproject
+.~lock.*
+.buildpath
+.idea
+.project
+.settings
+composer.lock
+
+# IDE files #
+#############
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
