@@ -2,8 +2,11 @@
 
 ## Introduction
 
-The first prototype was developed as part of a hackathon #WirvsVirus of the German government.\
-It was mainly a proof of concept to show how a mechanical setup could look like.
+The very first prototype was developed as part of a hackathon #WirvsVirus of the German government.\
+It was mainly a proof of concept to show how a mechanical setup could look like.\
+The core idea is a belt looped around a bag valve mask and winded up by a rotor to
+squeeze the bag.
+
 
 A video summarizing the hackathon can be found on our official YouTube channel [here](https://www.youtube.com/watch?v=LgbF94eOf6w&t=19s
 ).
@@ -48,17 +51,48 @@ Here, you can find the two videos:
 
 ## Software setup
 
+A simple software driver for Arduino controlling a stepper motor driver has been used.\
+Such example sketches can be easily found on the Internet, e.g. here:
+
+* [Easy Driver Examples](https://www.schmalzhaus.com/EasyDriver/Examples/EasyDriverExamples.html)
+* [Adafruit stepper tutorial #1](https://learn.adafruit.com/adafruit-motor-shield/using-stepper-motors)
+* [Adafruit stepper tutorial #2](https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/using-stepper-motors)
+* [Adafruit Arduino lessons](https://learn.adafruit.com/adafruit-arduino-lesson-16-stepper-motors)
+
 ## Bill of material
+
+* 2-piece printed frame (motor-side and backside) 
+* 2-piece rotor for motor shaft
+* Belt of fibre tape 
+* NEMA 17 stepper motor
 
 ## Advantages and disadvantages
 
-* When the device is running with full power over a long time, the head deforms the material
-* Due to to no transmission, the torque from the motor is too low
+### Advantages
+
+* Most simple design 
+* Highly robust
+* Perfectly printable
+* Almost no friction in the mechanics itself 
+* Single-sided or symmetrical pull possible
+
+### Disadvantages
+
+* High torque motor required: due to missing transmission, the torque of the motor is too low
 * No continuous compression of the bag valve mask possible
 * The design with the belt cannot compress the bag efficiently
   * Force is applied symmetrically 
   * The bag cannot be efficiently compressed as the material itself resists to compression
   * If a buckling occurs, the bag cannot be compressed anymore
+* When the device is running with full power over a long time, the heat deforms the material
+* Belt size/width determines the required force
+* Not well suited for the self-inflating design of the bag valve mask
+* Friction of belt on bag valve mask
+
+## Status
+
+Prototype was built and experimentally verified.\
+Due to the disadvantages not further used. Current status not recommended to be rebuilt.
 
 ## Related prototypes
 
