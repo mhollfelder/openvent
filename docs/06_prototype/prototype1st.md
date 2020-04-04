@@ -4,8 +4,9 @@ Please check the status of the prototype [here](#status).
 
 ## Introduction
 
-The very first prototype was developed as part of the hackathon #WirvsVirus of the German government.\
-It was mainly a proof of concept to show how a mechanical setup could look like.\
+The very first prototype was developed as part of the hackathon [#WirvsVirus](https://www.deutschland.de/en/topic/knowledge/hackathon-on-corona-wirvsvirus-brings-solutions) of the German government.
+
+The prototype was mainly a proof of concept to show how a mechanical setup could look like and work.\
 The core idea is a belt wrapped around a bag valve mask (also know as Ambu bag) and winded up by a rotor to squeeze the bag.
 
 A video summarizing the results from the hackathon can be found on our official YouTube channel OpenVent [here](https://www.youtube.com/watch?v=LgbF94eOf6w&t=19s
@@ -17,7 +18,8 @@ A video summarizing the results from the hackathon can be found on our official 
 
 The basic idea of this prototype is to use a [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it.\
 A belt is compressing the bag by being wrapped around an axis which is driven by a stepper motor.\
-The design and idea is also inspired by the one shown by the [OSV/OpenLung](https://opensourceventilator.ie/) team and which is shown [here](https://www.hackster.io/news/open-source-ventilator-openlung-projects-aim-to-address-the-covid-19-ventilator-shortfall-c7a5ee2f8e58).
+The design and idea is also inspired by the one shown by the [OSV/OpenLung](https://opensourceventilator.ie/) team and which is shown [here](https://www.hackster.io/news/open-source-ventilator-openlung-projects-aim-to-address-the-covid-19-ventilator-shortfall-c7a5ee2f8e58).\
+No further parameters are controlled or gathered, it's a free-wheeling system just trying to compress a bag of air and trying to generate an air-flow.
 
 ## Design files
 
@@ -25,10 +27,18 @@ The design files for the initial prototype can be found [here](https://github.co
 
 The basic folder structure is as follows:
 
-We have uploaded the `.stl` files of the initial prototype to the repository.\
-If you modify them or use them for additional testing, feel free to create a branch in our repository and work with those files.
+```console
+00 firstPrototype/
+┣ 00_completeSet/   # A complete set for further processing
+┣ 01_frame/         # The frame as an outline of the prototype
+┗ 02_axis/          # Different motor axis for connecting the motor
+```
 
-The design files are illustrated here in the section [Mechanical and hardware setup](#mechanical-and-hardware-setup). 
+We have uploaded the `.stl` files of the initial prototype to the repository in the respective `mechanics/stable` branch.\
+If you modify them or use them for additional testing, feel free to create a branch in your repository and work with those files.\
+Feedback would be very much appreciated and please feed back the changes to the community.
+
+The design files are illustrated in the section [Mechanical and hardware setup](#mechanical-and-hardware-setup). 
 
 ## Mechanical and hardware setup
 
@@ -40,7 +50,7 @@ The mechanical design and setup is illustrated here:
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_printer_preview.jpeg" height="200px">
 </p>
 
-As you can see above, the motor is directly connected to the axis.\
+As you can see above, the motor is directly connected to the axis without any transmission.\
 Moreover, the axis holds the belt which is getting wrapped around it when the motor starts.\
 Relaxation of the compressed object will un-wind the belt and relax the whole setup. The assembled real-life prototype is illustrated here:
 
@@ -50,7 +60,8 @@ Relaxation of the compressed object will un-wind the belt and relax the whole se
 </p>
 
 For a first test with a balloon, one NEMA-17 stepper motor with `0.5 Nm` was used with a voltage of `6 V`. Here, the device had problems with compressing the balloon as the power was too low.\
-The second test with `12 V` and the same setup showed better results as the balloon got more squeezed.
+The second test with `12 V` and the same setup showed better results as the balloon got more squeezed.\
+Current limitation up to `1 A` was applied to the driver for initial testing.
 
 Here, you can find the two videos:
 
@@ -124,4 +135,4 @@ Current status not recommended to be rebuilt as it is.
 
 ## Related prototypes
 
-As this is the first prototype, there are no predecessors and additional related ones existing. 
+As this is the first prototype, there are no predecessors and additional related ones existing.
