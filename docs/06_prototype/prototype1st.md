@@ -1,43 +1,48 @@
 # First prototype
 
+Please check the status of the prototype [here](#status).
+
 ## Introduction
 
-The very first prototype was developed as part of a hackathon #WirvsVirus of the German government.\
+The very first prototype was developed as part of the hackathon #WirvsVirus of the German government.\
 It was mainly a proof of concept to show how a mechanical setup could look like.\
-The core idea is a belt looped around a bag valve mask and winded up by a rotor to
-squeeze the bag.
+The core idea is a belt wrapped around a bag valve mask (also know as Ambu bag) and winded up by a rotor to squeeze the bag.
 
-
-A video summarizing the hackathon can be found on our official YouTube channel [here](https://www.youtube.com/watch?v=LgbF94eOf6w&t=19s
+A video summarizing the results from the hackathon can be found on our official YouTube channel OpenVent [here](https://www.youtube.com/watch?v=LgbF94eOf6w&t=19s
 ).
 
-[<img src="https://img.youtube.com/vi/LgbF94eOf6w/0.jpg">](https://www.youtube.com/watch?v=LgbF94eOf6w)
+<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/LgbF94eOf6w/0.jpg" width="300px"></a>
 
 ## Idea
 
 The basic idea of this prototype is to use a [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it.\
-A belt is compressed by being wrapped around an axis which is driven by a stepper motor.\
-The design and idea is inspired by the one developed by the [OSV/OpenLung](https://opensourceventilator.ie/) team and which is shown [here](https://www.hackster.io/news/open-source-ventilator-openlung-projects-aim-to-address-the-covid-19-ventilator-shortfall-c7a5ee2f8e58).
+A belt is compressing the bag by being wrapped around an axis which is driven by a stepper motor.\
+The design and idea is also inspired by the one shown by the [OSV/OpenLung](https://opensourceventilator.ie/) team and which is shown [here](https://www.hackster.io/news/open-source-ventilator-openlung-projects-aim-to-address-the-covid-19-ventilator-shortfall-c7a5ee2f8e58).
 
 ## Design files
 
-The design files for the initial prototype can be found here:
+The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00_firstPrototype).
+
+The basic folder structure is as follows:
 
 We have uploaded the `.stl` files of the initial prototype to the repository.\
 If you modify them or use them for additional testing, feel free to create a branch in our repository and work with those files.
+
+The design files are illustrated here in the section [Mechanical and hardware setup](#mechanical-and-hardware-setup). 
 
 ## Mechanical and hardware setup
 
 The mechanical design and setup is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_stepper_axis.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_motor_with_belt.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_design_explosion.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_design_assembled.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_printer_preview.jpeg" height="200px">
 </p>
 
 As you can see above, the motor is directly connected to the axis.\
 Moreover, the axis holds the belt which is getting wrapped around it when the motor starts.\
-Relaxation of the compressed object will un-wind the belt and relax the whole setup. The assembled device is illustrated here:
+Relaxation of the compressed object will un-wind the belt and relax the whole setup. The assembled real-life prototype is illustrated here:
 
 <p>
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_assembled.jpeg" height="200px">
@@ -49,7 +54,10 @@ The second test with `12 V` and the same setup showed better results as the ball
 
 Here, you can find the two videos:
 
-## Software setup
+<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/kt0_SyTIqIQ/0.jpg" width="250px"></a>
+<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/SUNwU-FeAAc/0.jpg" width="250px"></a>
+
+## Software and hardware setup
 
 A simple software driver for Arduino controlling a stepper motor driver has been used.\
 Such example sketches can be easily found on the Internet, e.g. here:
@@ -59,12 +67,26 @@ Such example sketches can be easily found on the Internet, e.g. here:
 * [Adafruit stepper tutorial #2](https://learn.adafruit.com/adafruit-motor-shield-v2-for-arduino/using-stepper-motors)
 * [Adafruit Arduino lessons](https://learn.adafruit.com/adafruit-arduino-lesson-16-stepper-motors)
 
+Any microcontroller supporting Arduino can be used.
+
+We used an Infineon [XMC microcontroller](https://www.infineon.com/cms/en/product/microcontroller/32-bit-industrial-microcontroller-based-on-arm-cortex-m/) on a [XMC4700 Relax Kit](https://github.com/Infineon/XMC-for-Arduino/wiki/XMC4700-Relax-Kit) wih the [XMC-for-Arduino](https://github.com/Infineon/XMC-for-Arduino) integration.\
+As a stepper motor control shield we used the [KIT_XMC1300_IFX9201](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc1300_ifx9201/) from Infineon.\
+The official software can be found [here](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc1300_ifx9201/#!tools), an Arduino integration can be found [here](https://github.com/Infineon/Stepper-Motor-Shield-IFX9201-XMC1300).
+
 ## Bill of material
+
+### Mechanics
 
 * 2-piece printed frame (motor-side and backside) 
 * 2-piece rotor for motor shaft
 * Belt of fibre tape 
-* NEMA 17 stepper motor
+* NEMA-17 stepper motor
+
+### Hardware
+
+* [KIT_XMC1300_IFX9201](https://www.infineon.com/cms/en/product/evaluation-boards/kit_xmc1300_ifx9201/)
+* [XMC4700 Relax Kit](https://github.com/Infineon/XMC-for-Arduino/wiki/XMC4700-Relax-Kit)
+* External power supply
 
 ## Advantages and disadvantages
 
@@ -91,10 +113,15 @@ Such example sketches can be easily found on the Internet, e.g. here:
 
 ## Status
 
+:boom:
+
+* [X] INACTIVE
+* [ ] ACTIVE
+
 Prototype was built and experimentally verified.\
-Due to the disadvantages not further used. Current status not recommended to be rebuilt.
+Due to the disadvantages it is **NOT** further used.\
+Current status not recommended to be rebuilt as it is.
 
 ## Related prototypes
 
 As this is the first prototype, there are no predecessors and additional related ones existing. 
-
