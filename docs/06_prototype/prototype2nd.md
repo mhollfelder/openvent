@@ -43,8 +43,8 @@ The design files are illustrated in the section [Mechanical and hardware setup](
 The mechanical design and setup is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_design_explosion.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_design_assembled.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_design_explosion.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_design_assembled.jpeg" height="200px">
 </p>
 
 As you can see above, the motor is directly connected to the axis without any transmission.\
@@ -52,8 +52,8 @@ Moreover, the axis holds the wires which is getting wrapped around it when the m
 Relaxation of the compressed object will un-wind the wire and relax the whole setup. The assembled real-life prototype is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_assembled_relaxed.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_assembled_compressed.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_assembled_test_relaxed.jpeg" height="250px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_assembled_test_compressed.jpeg" height="250px">
 </p>
 
 The core advantage compared to the first [prototype](./prototype1st.md) is that the compression is done with two cylinders from the side.\
