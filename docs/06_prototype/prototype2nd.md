@@ -4,15 +4,12 @@ Please check the status of the prototype [here](#status).
 
 ## Introduction
 
-The very first prototype was developed as part of the hackathon [#WirvsVirus](https://www.deutschland.de/en/topic/knowledge/hackathon-on-corona-wirvsvirus-brings-solutions) of the German government.
-
-The second prototype is the further development of the first [prototype](./prototype1st.md).\
+The second prototype is the logical development of the first [prototype](./prototype1st.md).\
 It is an extension of the first prototype with two pushing levers.
 
-A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here](https://www.youtube.com/watch?v=LgbF94eOf6w&t=19s
-).
+A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here]().
 
-<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/LgbF94eOf6w/0.jpg" width="300px"></a>
+<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="300px"></a>
 
 ## Idea
 
@@ -46,32 +43,33 @@ The design files are illustrated in the section [Mechanical and hardware setup](
 The mechanical design and setup is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_design_explosion.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_design_assembled.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_printer_preview.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_design_explosion.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_design_assembled.jpeg" height="200px">
 </p>
 
 As you can see above, the motor is directly connected to the axis without any transmission.\
-Moreover, the axis holds the belt which is getting wrapped around it when the motor starts.\
-Relaxation of the compressed object will un-wind the belt and relax the whole setup. The assembled real-life prototype is illustrated here:
+Moreover, the axis holds the wires which is getting wrapped around it when the motor starts.\
+Relaxation of the compressed object will un-wind the wire and relax the whole setup. The assembled real-life prototype is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_assembled.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v1_assembled_test.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_assembled_relaxed.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/1stprototype/v2_assembled_compressed.jpeg" height="200px">
 </p>
 
-For a first test with a balloon, one NEMA-17 stepper motor with `0.5 Nm` was used with a voltage of `6 V`. Here, the device had problems with compressing the balloon as the power was too low.\
-The second test with `12 V` and the same setup showed better results as the balloon got more squeezed.\
-Current limitation up to `1 A` was applied to the driver for initial testing.
+The core advantage compared to the first [prototype](./prototype1st.md) is that the compression is done with two cylinders from the side.\
+This solves the problem that the belt of the first prototype was symmetrically wrapped around the bag valve mask.\
+This introduced additional friction and forces as the bag was symmetrically compressed. Here, the cylinders push from the side with small surfaces only.
+
+For a first test with, one NEMA-17 stepper motor was used again and it was able to compress the bag efficiently.
 
 Here, you can find the two videos:
 
-<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/kt0_SyTIqIQ/0.jpg" width="250px"></a>
-<a href="https://www.youtube.com/watch?v=LgbF94eOf6w"><img src="https://img.youtube.com/vi/SUNwU-FeAAc/0.jpg" width="250px"></a>
+<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="250px"></a>
+<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="250px"></a>
 
 ## Software and hardware setup
 
-A simple software driver for Arduino controlling a stepper motor driver has been used.\
+A simple software driver for Arduino controlling a stepper motor driver has been used similar as for the first [prototype](./prototype1st.md).\
 Such example sketches can be easily found on the Internet, e.g. here:
 
 * [Easy Driver Examples](https://www.schmalzhaus.com/EasyDriver/Examples/EasyDriverExamples.html)
@@ -89,14 +87,11 @@ The official software can be found [here](https://www.infineon.com/cms/en/produc
 
 ### Mechanics
 
-: 2-piece printed fame (motor-side and backside), 2 levers, 2-piece
-rotor for motor shaft, thin belt/smooth rope, NEMA-17 or NEMA-23
-stepper motor
-
 * 2-piece printed frame (motor-side and backside) 
 * 2-piece rotor for motor shaft
-* Belt of fibre tape 
-* NEMA-17 stepper motor
+* 2 levers
+* Belt/smooth rope 
+* NEMA-17 or NEMA-23 stepper motor
 
 ### Hardware
 
