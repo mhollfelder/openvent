@@ -28,7 +28,7 @@ The design files for the initial prototype can be found [here](https://github.co
 The basic folder structure is as follows:
 
 ```console
-00 firstPrototype/
+00_firstPrototype/
 ┣ 00_completeSet/   # A complete set for further processing
 ┣ 01_frame/         # The frame as an outline of the prototype
 ┗ 02_axis/          # Different motor axis for connecting the motor
