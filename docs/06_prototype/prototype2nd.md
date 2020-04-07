@@ -7,7 +7,7 @@ Please check the status of the prototype [here](#status).
 The second prototype is the logical development of the first [prototype](./prototype1st.md).\
 It is an extension of the first prototype with two pushing levers.
 
-A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here]().
+A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here](https://www.youtube.com/watch?v=z1eN3fDKDu0).
 
 <a href="https://www.youtube.com/watch?v=z1eN3fDKDu0"><img src="https://img.youtube.com/vi/z1eN3fDKDu0/0.jpg" width="300px"></a>
 
