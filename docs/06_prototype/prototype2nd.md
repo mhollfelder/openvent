@@ -9,7 +9,7 @@ It is an extension of the first prototype with two pushing levers.
 
 A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here]().
 
-<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="300px"></a>
+<a href="https://www.youtube.com/watch?v=z1eN3fDKDu0"><img src="https://img.youtube.com/vi/z1eN3fDKDu0/0.jpg" width="300px"></a>
 
 ## Idea
 
@@ -21,15 +21,15 @@ No further parameters are controlled or gathered, it's a free-wheeling system ju
 
 ## Design files
 
-The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00%20secondPrototype).
+The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/01_secondPrototype).
 
 The basic folder structure is as follows:
 
 ```console
-00 firstPrototype/
-┣ 00_completeSet/   # A complete set for further processing
+01_secondPrototype/
 ┣ 01_frame/         # The frame as an outline of the prototype
-┗ 02_axis/          # Different motor axis for connecting the motor
+┣ 02_axis/          # Different motor axis for connecting the motor
+┗ 03_tilt/          # The tilt with the lever and cylinders
 ```
 
 We have uploaded the `.stl` files of the initial prototype to the repository in the respective `mechanics/stable` branch.\
@@ -62,10 +62,9 @@ This introduced additional friction and forces as the bag was symmetrically comp
 
 For a first test with, one NEMA-17 stepper motor was used again and it was able to compress the bag efficiently.
 
-Here, you can find the two videos:
+Here, you can find the video:
 
-<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="250px"></a>
-<a href="https://www.youtube.com/watch?v=TBD"><img src="https://img.youtube.com/vi/TBD/0.jpg" width="250px"></a>
+<a href="https://www.youtube.com/watch?v=z1eN3fDKDu0"><img src="https://img.youtube.com/vi/z1eN3fDKDu0/0.jpg" width="250px"></a>
 
 ## Software and hardware setup
 
