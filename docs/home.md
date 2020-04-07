@@ -1,6 +1,6 @@
 # Homepage
 
-We are using [Docsify](https://docsify.js.org/) to generate this documentation on the fly from the Markdown files in `/docs` of the [repository](https://www.github.com/mhollfelder/openvent).\
+We are using [Docsify](https://github.com/docsifyjs/docsify) to generate this documentation on the fly from the Markdown files in `/docs` of the [repository](https://www.github.com/mhollfelder/openvent).\
 Basically, writing documentation means adding additional Markdown files plus modifying Docsify settings if required.
 
 The documentation here is served via Docsify and you are accessing the landing page.

@@ -45,9 +45,7 @@ This project started as part of the hackathon [#WirvsVirus](https://wirvsvirusha
 
 ## Basic documentation structure
 
-You can find all documentation in the `docs` folder.
-
-We are using [Docsify](https://docsify.js.org/) to generate the documentation on the fly from the Markdown files in `/docs` of the [repository](https://www.github.com/mhollfelder/openvent).\
+We are using [Docsify](https://github.com/docsifyjs/docsify) to generate this documentation on the fly from the Markdown files in `/docs` of the [repository](https://www.github.com/mhollfelder/openvent).\
 Basically, writing documentation means adding additional Markdown files plus modifying Docsify settings if required.
 
 The documentation can also be hosted locally by executing the following command from the repository root: 
@@ -58,7 +56,7 @@ cd ./docs
 docsify serve
 ```
 
-Afterwards, you can visit the documentation here [http://localhost:3000](http://localhost:3000).
+Afterwards, you can visit the documentation via `http://localhost:3000` in the browser.
 
 ## Current status
 

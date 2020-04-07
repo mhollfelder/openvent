@@ -28,5 +28,5 @@ Please check our development flow here to see how these components are developed
 The BOM for the device depends on the respective prototype.\
 Please check out the respective prototype pages as well for more information.\
 
-The BOM of the latest prototype can be found [here](./prototype/latest.md).
+The BOM of the latest prototypes can be found [here](../06_prototype/latest.md).
 
