@@ -15,22 +15,24 @@ docsify serve
 
 Afterwards, you can visit the documentation here [http://localhost:3000](http://localhost:3000).
 
-## Folder and file structure
+## Folder and file structure of docs
 
 ```console
 docs/
-┣ concept/          // The overall concept and generic explanation
-┣ design/           // Design and communications related documentation
-┣ getstarted/       // A Get Started guide
-┣ knowledge/        // The knowledge hub around this topic
-┣ mechanics/        // Documentation of the mechanical design
-┣ prototype/        // Documentation of prototypes
-┣ software/         // All software related documentation
-┣ .gitkeep          // Keep this folder for Git even if empty
+┣ 01_getstarted/    // A Get Started guide
+┣ 02_concept/       // The overall concept and generic explanation
+┣ 03_hardware/      // The hardware documentation
+┣ 04_software/      // All software related documentation
+┣ 05_mechanics/     // Documentation of the mechanical design
+┣ 06_prototype/     // Documentation of prototypes
+┣ 07_knowledge/     // The knowledge hub around this topic
+┣ 08_development/   // The overall development flow
+┣ _sidebar.md       // The sidebar for Docsify
+┣ .gitkeep          // Keep this folder tracked in Git even if it is empty   
 ┣ .nojekyll         // Configure Jekyll for GitHub pages to not ignore files starting with underscore
+┣ home.md           // The Docsify homepage
 ┣ index.html        // Docsify index.html file for Docsify configuration
-┣ README.md         // This README file
-┗ _sidebar.md       // The sidebar for Docsify
+┗ README.md         // This README file
 ```
 
 ## Disclaimer
@@ -64,20 +66,22 @@ This project started as part of the hackathon [#WirvsVirus](https://wirvsvirusha
 ## Current status
 
 Right now, a prototype is in development with a bag valve mask, a 3D printed fixture and a motor.\
-The prototype is tested and in an iterative, agile approach improved to provide a simple design.
+The prototype is tested and in an iterative, agile approach improved to provide a simple design.\
+We are right now uploading the designs and design files for next steps and testing.
+
+The latest prototype can be found in the folder `docs/06_prototype`.
 
 ## Development branches
 
-We have the following components:
+We have the following tracks:
 
-- `Concept`
+- `Docs`
 - `Software`
 - `Hardware`
 - `Mechanics`
-- `Documentation`
 
-From the concept branch we merge information and drafts into the `Hardware`, `Software`, and `Mechanics` branch.\
-Afterwards, we document the prototypes and the approach once all components come together in the `Document` branch.
+The development flow and more details are right now documented.\
+We will soon upload it to `docs/08_development` and present you more details.
 
 ## Development flow
 
@@ -111,4 +115,4 @@ Additionally, please get in contact with us via contact.openvent@gmail.com for m
 
 ## Similar projects
 
-Here, we will add a list of similar projects which are worth being checked out.
+We will provide a list of similar projects in the `docs/07_knowledge` folder soon.

@@ -23,12 +23,12 @@ No further parameters are controlled or gathered, it's a free-wheeling system ju
 
 ## Design files
 
-The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00%20firstPrototype).
+The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00_firstPrototype).
 
 The basic folder structure is as follows:
 
 ```console
-00 firstPrototype/
+00_firstPrototype/
 ┣ 00_completeSet/   # A complete set for further processing
 ┣ 01_frame/         # The frame as an outline of the prototype
 ┗ 02_axis/          # Different motor axis for connecting the motor
