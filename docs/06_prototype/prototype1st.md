@@ -23,7 +23,7 @@ No further parameters are controlled or gathered, it's a free-wheeling system ju
 
 ## Design files
 
-The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00%20firstPrototype).
+The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00_firstPrototype).
 
 The basic folder structure is as follows:
 
