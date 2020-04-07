@@ -5,7 +5,7 @@ Please check the status of the prototype [here](#status).
 ## Introduction
 
 The third prototype is merging the condensed learnings of the first two [prototypes](./README.md).\
-However, it is mainly the extension of the first prototype with one tilting lever that is pulled to squeeze the bag valve mask.
+In a nutshell, it is mainly an extension of the first prototype with one tilting lever that is pulled to squeeze the bag valve mask.
 
 A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here]().
 
@@ -13,15 +13,15 @@ A video summarizing the testing of this prototype can be found on our YouTube ch
 
 ## Idea
 
-The basic idea of this prototype continues with the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it, similar as the first prototype [here](./prototype1st.md).\
-A bag valve mask gets squeezed between two tilting levers (similar to a lift bridge).\ 
-Two belts attached to the top of each lever end on one lever and are looped around the opposite side lever.\ 
-During compression, these belts get winded up by a motor to pull the levers together and relaxation is driven by the bag valve mask itself.\
+The basic idea of this prototype sticks still to the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it, similar as the first prototype [here](./prototype1st.md).\
+A bag valve mask gets squeezed between the frame and one tilting lever (similar to a lift bridge) with one side attached to the frame.\
+The other side is pulled down by a belt that is winded up by a motor.\ 
+During compression, the belt get winded up by a motor to pull the lever bridge down and relaxation is driven by the bag valve mask itself.\
 No further parameters are controlled or gathered, it's a free-wheeling system just trying to compress a bag of air and trying to generate an air-flow.
 
 ## Design files
 
-The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/01_secondPrototype).
+The design files for the initial prototype can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/02_thirdPrototype).
 
 The basic folder structure is as follows:
 
@@ -43,8 +43,8 @@ The design files are illustrated in the section [Mechanical and hardware setup](
 The mechanical design and setup is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_design_explosion.jpeg" height="200px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_design_assembled.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2rdprototype/v3_design_explosion.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_design_assembled.jpeg" height="200px">
 </p>
 
 As you can see above, the motor is directly connected to the axis without any transmission.\
@@ -52,8 +52,8 @@ Moreover, the axis holds the wires which is getting wrapped around it when the m
 Relaxation of the compressed object will un-wind the wire and relax the whole setup. The assembled real-life prototype is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_assembled_test_relaxed.jpeg" height="250px">
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_assembled_test_compressed.jpeg" height="250px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_assembled_test_relaxed.jpeg" height="250px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_assembled_test_compressed.jpeg" height="250px">
 </p>
 
 The core advantage compared to the first [prototype](./prototype1st.md) is that the compression is done with two cylinders from the side.\
