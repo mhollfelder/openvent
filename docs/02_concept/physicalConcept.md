@@ -1,3 +1,6 @@
+---
+useMath: true
+---
 # Physical concept
 
 ## Motor Requirements and Analysis
@@ -9,7 +12,13 @@ For simplicity we will consider the following assumptions:
   - The 800mL are pumped into the lung within 1 second
 
 As such we can estimate the lung compliance as:
-$$C = \frac{Delta V }{ \Delta P}$$
+<!--$$C = \frac{Delta V }{ \Delta P}$$-->
+<div class="math">
+\begin{equation}
+  C = \frac{\Delta V}{\Delta P}  
+\end{equation}
+</div>
+
 
 The energy stored in the capacitor is:
 $$E_C = \frac{1}{2} C \Delta P^2$$
