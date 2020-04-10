@@ -1,6 +1,4 @@
----
-useMath: true
----
+<!-- using https://www.codecogs.com/latex/eqneditor.php to generate equations-->
 # Physical concept
 
 ## Motor Requirements and Analysis
@@ -13,23 +11,23 @@ For simplicity we will consider the following assumptions:
 
 As such we can estimate the lung compliance as:
 <!--$$C = \frac{Delta V }{ \Delta P}$$-->
-<div class="math">
-\begin{equation}
-  C = \frac{\Delta V}{\Delta P}  
-\end{equation}
-</div>
-
+<a href="https://www.codecogs.com/eqnedit.php?latex=C&space;=&space;\frac{\Delta&space;V}{\Delta&space;P}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C&space;=&space;\frac{\Delta&space;V}{\Delta&space;P}" title="C = \frac{\Delta V}{\Delta P}" /></a>
 
 The energy stored in the capacitor is:
-$$E_C = \frac{1}{2} C \Delta P^2$$
+<!--$$E_C = \frac{1}{2} C \Delta P^2$$-->
+<a href="https://www.codecogs.com/eqnedit.php?latex=E_C&space;=&space;\frac{1}{2}&space;C&space;\Delta&space;P^2" target="_blank"><img src="https://latex.codecogs.com/gif.latex?E_C&space;=&space;\frac{1}{2}&space;C&space;\Delta&space;P^2" title="E_C = \frac{1}{2} C \Delta P^2" /></a>
 
 The power required to pump air into the lung is:
-$$P_C = \frac{E_C}{\Delta T_i}$$
+<!--$$P_C = \frac{E_C}{\Delta T_i}$$-->
+<a href="https://www.codecogs.com/eqnedit.php?latex=P_C&space;=&space;\frac{E_C}{\Delta&space;T_i}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_C&space;=&space;\frac{E_C}{\Delta&space;T_i}" title="P_C = \frac{E_C}{\Delta T_i}" /></a>
 
 where $\Delta T_i$ is the inhalation period. Following the assumptions the equations above:
-$$C = \frac{800mL}{60cmH2O} = 1.3\cross 10^{-7} m^3/Pa $$
-$$E_C = \frac{1}{2} \cross 1.3\cross 10^{-7} 6000^2 = 2.3 J$$
-$$P_C = \frac{E_C}{\Delta T_i} = \frac{2.3J}{1 s} = 2.3 W$$
+<!--$$C = \frac{800mL}{60cmH2O} = 1.3\times 10^{-7} m^3/Pa $$-->
+<a href="https://www.codecogs.com/eqnedit.php?latex=C&space;=&space;\frac{800mL}{60cmH2O}&space;=&space;1.3\times&space;10^{-7}&space;m^3/Pa" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C&space;=&space;\frac{800mL}{60cmH2O}&space;=&space;1.3\times&space;10^{-7}&space;m^3/Pa" title="C = \frac{800mL}{60cmH2O} = 1.3\times 10^{-7} m^3/Pa" /></a>
+<!--$$E_C = \frac{1}{2} \times 1.3\times 10^{-7} 6000^2 = 2.3 J$$-->
+<a href="https://www.codecogs.com/eqnedit.php?latex=E_C&space;=&space;\frac{1}{2}&space;\times&space;1.3\times&space;10^{-7}&space;6000^2&space;=&space;2.3&space;J" target="_blank"><img src="https://latex.codecogs.com/gif.latex?E_C&space;=&space;\frac{1}{2}&space;\times&space;1.3\times&space;10^{-7}&space;6000^2&space;=&space;2.3&space;J" title="E_C = \frac{1}{2} \times 1.3\times 10^{-7} 6000^2 = 2.3 J" /></a>
+<!--$$P_C = \frac{E_C}{\Delta T_i} = \frac{2.3J}{1 s} = 2.3 W$$-->
+<a href="https://www.codecogs.com/eqnedit.php?latex=P_C&space;=&space;\frac{E_C}{\Delta&space;T_i}&space;=&space;\frac{2.3J}{1&space;s}&space;=&space;2.3&space;W" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P_C&space;=&space;\frac{E_C}{\Delta&space;T_i}&space;=&space;\frac{2.3J}{1&space;s}&space;=&space;2.3&space;W" title="P_C = \frac{E_C}{\Delta T_i} = \frac{2.3J}{1 s} = 2.3 W" /></a>
 
 For simplicity, we assume that half of the motor power will be lost in the mechanics and another half of the remaining power in the tubing and the Ambu Bag. As such, a motor with around 10W power rating should be able to ventilate a lung.
 
