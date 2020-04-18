@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<body>
+
+    <!-- Image and text -->
+<!-- As a heading -->
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">TheOpenVent API v2 documentation</span>
+  </nav>
+
+  <div class="container">
+
+    <h1> Description of the parameters </h1>
+
+    <h2> General parameters & groups </h2>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Parameter</th>
+          <th scope="col">Unit</th>
+          <th scope="col">Data type</th>
+          <th scope="col">Comment</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+              <td>device_id</td>
+              <td>-</td>
+              <td>unsigned integer</td>
+              <td>unique identifier of the ventilator</td>
+            </tr>
+        <tr>
+            <td>processed</td>
+            <td>-</td>
+            <td>group</td>
+            <td>human readable parameters, which are calculated from raw values</td>
+          </tr>
+          <tr>
+            <td>trigger_settings</td>
+            <td>-</td>
+            <td>group</td>
+            <td>Settings of the ventilator</td>
+          </tr>
+          <tr>
+            <td>raw</td>
+            <td>-</td>
+            <td>group</td>
+            <td>raw values coming directly from the sensors</td>
+          </tr>
+          <tr>
+            <td>time</td>
+            <td>seconds</td>
+            <td>unsigned integer</td>
+            <td>the Unix timestamp of the data</td>
+          </tr>
+          </tbody>
+          </table>
+
+          <h2> Processed parameters </h2>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Parameter</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Data type</th>
+            <th scope="col">Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+                <td>volumePerMovement</td>
+                <td>mL</td>
+                <td>unsigned integer</td>
+                <td>total inspired volume per breath cycle</td>
+              </tr>
+              <tr>
+                <td>frequency</td>
+                <td>1/minute</td>
+                <td>unsigned integer</td>
+                <td>total number of breathes per minute</td>
+              </tr>
+              <tr>
+                <td>MVe</td>
+                <td>mL</td>
+                <td>integer</td>
+                <td>total inspired air over one minute</td>
+              </tr>
+              <tr>
+                <td>ventilationMode</td>
+                <td>-</td>
+                <td>string</td>
+                <td>type of the control e.g: Assist Control/ Pressure Control/ Volume Control/ Flowrate Control</td>
+              </tr>
+              <tr>
+                <td>ExpiredCO2</td>
+                <td>%</td>
+                <td>float</td>
+                <td>concentration of expired CO2</td>
+              </tr>
+              <tr>
+                <td>ExpiredO2</td>
+                <td>%</td>
+                <td>float</td>
+                <td>concentration of expired O2</td>
+              </tr>
+              <tr>
+                <td>flowrate</td>
+                <td>mL/min</td>
+                <td>unsigned integer</td>
+                <td>flowrate</td>
+              </tr>
+              <tr>
+                <td>pressure</td>
+                <td>cmH20</td>
+                <td>integer</td>
+                <td>air pressure</td>
+              </tr>
+            </tr>
+          </tbody>
+          </table>
+
+          <h2> Trigger settings </h2>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Parameter</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Data type</th>
+            <th scope="col">Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+
+              <tr>
+                <td>FiO2</td>
+                <td>%</td>
+                <td>float</td>
+                <td>O2 concentration of inspired air</td>
+              </tr>
+              <tr>
+                <td>humidity</td>
+                <td>%</td>
+                <td>float</td>
+                <td>Air humidity of inspired air</td>
+              </tr>
+              <tr>
+                <td>pressure_max</td>
+                <td>cmH2O</td>
+                <td>unsigned integer</td>
+                <td>Maximum allowed peak pressure</td>
+              </tr>
+              <tr>
+                <td>RR</td>
+                <td>1 / minute</td>
+                <td>unsigned integer</td>
+                <td>Breathes per Minute</td>
+              </tr>
+              <tr>
+                <td>VT</td>
+                <td>mL</td>
+                <td>unsigned integer</td>
+                <td>Tidal Volume</td>
+              </tr>
+              <tr>
+                <td>PEEP</td>
+                <td>cmH2O</td>
+                <td>float</td>
+                <td>Positive End Expiratory Pressure</td>
+              </tr>
+              <tr>
+                <td>IE</td>
+                <td>-</td>
+                <td>float</td>
+                <td>Inspiration to Expiration rate: 1.4 = 1 to 4</td>
+              </tr>
+            </tr>
+          </tbody>
+          </table>
+
+          <h2> Raw parameters </h2>
+
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Parameter</th>
+            <th scope="col">Unit</th>
+            <th scope="col">Data type</th>
+            <th scope="col">Comment</th>
+          </tr>
+        </thead>
+        <tbody>
+              <tr>
+                <td>pressure1</td>
+                <td>cmH2O</td>
+                <td>unsigned integer</td>
+                <td>Raw data of pressure sensor 1</td>
+              </tr>
+              <tr>
+                <td>pressure2</td>
+                <td>cmH2O</td>
+                <td>unsigned integer</td>
+                <td>Raw data of pressure sensor 2</td>
+              </tr>
+              <tr>
+                <td>temperature1</td>
+                <td>Celsius</td>
+                <td>float</td>
+                <td>Raw data of temperature sensor 1</td>
+              </tr>
+              <tr>
+                <td>temperature2</td>
+                <td>Celsius</td>
+                <td>float</td>
+                <td>Raw data of temperature sensor 2</td>
+              </tr>
+              <tr>
+                <td>angleSensor</td>
+                <td>degree</td>
+                <td>float</td>
+                <td>Raw data of angle sensor</td>
+              </tr>
+              <tr>
+                <td>current</td>
+                <td>A</td>
+                <td>float</td>
+                <td>Raw data of current sensor</td>
+              </tr>
+              <tr>
+                <td>motorRPM</td>
+                <td>1 / minute</td>
+                <td>integer</td>
+                <td>Motor rounds per minute</td>
+              </tr>
+        </tbody>
+    </table>
+  </div>
+  
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
