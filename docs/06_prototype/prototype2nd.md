@@ -28,11 +28,12 @@ The basic folder structure is as follows:
 ```console
 01_secondPrototype/
 ┣ 01_frame/         # The frame as an outline of the prototype
-┣ 02_axis/          # Different motor axis for connecting the motor
+┣ 02_axis/          # Motor axis for connecting the motor
 ┗ 03_tilt/          # The tilt with the lever and cylinders
 ```
 
 We have uploaded the `.stl` files of the initial prototype to the repository in the respective `mechanics/stable` branch.\
+The axis of the first prototype can be used as well and they are stored [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/01_firstPrototype/02_axis).\
 If you modify them or use them for additional testing, feel free to create a branch in your repository and work with those files.\
 Feedback would be very much appreciated and please feed back the changes to the community.
 
