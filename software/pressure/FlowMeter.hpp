@@ -25,9 +25,15 @@ class FlowMeter
   {
     // at least trigger the measurements as close in time as possible
     // (todo: use SPI or variable I2C address to make both sensors receive the same start command)
+    m_sensor0.startTemperatureMeasurements(false);
+    m_sensor1.startTemperatureMeasurements(false);
+
+    m_sensor0.getTemperature();
+    m_sensor1.getTemperature();    
+    
     m_sensor0.startPressureMeasurements(false);
     m_sensor1.startPressureMeasurements(false);
-    
+
     m_lastPressure[0] = m_sensor0.getPressure();
     m_lastPressure[1] = m_sensor1.getPressure();
 
