@@ -1,8 +1,5 @@
 
-// the following should be moved to a library
-
 #include <PressureSensorDPS310.h>
-
 
 
 class FlowMeter

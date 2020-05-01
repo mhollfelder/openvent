@@ -1,4 +1,3 @@
-
 #pragma once
 
 
@@ -82,4 +81,3 @@ private:
     T m_minOutput;
     T m_maxOutput;
 };
-
