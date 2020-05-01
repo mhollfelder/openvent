@@ -9,14 +9,12 @@
 #define MISO  97 // P3.12
 #define SCK   70 // P3.13
 
-
-
 Tle5012b_SPI Spi1 = Tle5012b_SPI(2);
 Tle5012b_reg Sensor1 = Tle5012b_reg();
 
+
 double raw_angle = 0;
 int16_t rev = 0;
-
 
 double absolut_angle;
 double absolut_angle_top;
@@ -41,6 +39,17 @@ bool safety;
 
 MotorController mc;
 
+
+typedef enum BreathingState
+{
+  INHALE,
+  EXHALE,
+  NONE // could be used for safety variable?
+};
+
+BreathingState state = NONE;
+uint32_t nextStep = 0, timeBase;
+
 void setup()
 {
   // put your setup code here, to run once:
@@ -54,47 +63,67 @@ void setup()
   absolut_angle_top = Nullpunkt;
   absolut_angle_bottom += absolut_angle_top;
 
-  inhale_millis = 60000/resp_per_minute*(inhale/(inhale+exhale));
-  exhale_millis = 60000/resp_per_minute*(exhale/(inhale+exhale));
+  timeBase = 1000*60/resp_per_minute/(inhale+exhale);
+}
+
+void breathingStateMachine()
+{
+  // timing
+  if (millis() > nextStep)
+  {
+    switch (state)
+    {
+    case INHALE:
+      state = EXHALE;
+      nextStep += timeBase * exhale;
+      break;
+    default:
+      // no break
+    case EXHALE:
+      state = INHALE;
+      nextStep += timeBase * inhale;
+      break;
+    }
+  }
+
+  switch (state)
+  {
+    case INHALE:
+      if (safety == 0)
+      {
+        mc.DIR = -1;
+        mc.DutyCycle = 20;
+      
+        //safety stop
+        if(absolut_angle < absolut_angle_bottom)
+        {
+          safety = 1;
+          mc.DIR = 0;
+        }
+      }
+      break;
+    case EXHALE:
+      safety = 0;
+      mc.DIR = 1;
+      mc.DutyCycle = 20;
+      
+      //safety stop
+      if(absolut_angle > absolut_angle_top)
+      {
+          digitalWrite(DIR_U, LOW);
+          digitalWrite(DIR_V, LOW);
+          digitalWrite(DIR_W, LOW);
+          mc.DIR = 2;
+      }
+      break;
+    default:
+      break;
+  }
 }
 
 void loop()
 {
-   
-  //Inhale phase
-  if((millis()-start_millis) < inhale_millis && safety == 0)
-  {
-    mc.DIR = -1;
-    mc.DutyCycle = 20;
-  
-    //safety stop
-    if(absolut_angle < absolut_angle_bottom)
-    {
-      safety = 1;
-      mc.DIR = 0;
-    }
-  }
-  
-  //Exhale phase
-  if((millis()-start_millis) > inhale_millis && (millis()-start_millis) < (inhale_millis+exhale_millis))
-  {
-    safety = 0;
-    mc.DIR = 1;
-    mc.DutyCycle = 20;
-    //safety stop
-    if(absolut_angle > absolut_angle_top)
-    {
-        digitalWrite(DIR_U, LOW);
-        digitalWrite(DIR_V, LOW);
-        digitalWrite(DIR_W, LOW);
-        mc.DIR = 2;
-    }
-  }
-  
-  if(millis()-start_millis > (inhale_millis+exhale_millis))
-  {
-    start_millis = millis();
-  }
+  breathingStateMachine();   
 
   calculateAngle();
   
