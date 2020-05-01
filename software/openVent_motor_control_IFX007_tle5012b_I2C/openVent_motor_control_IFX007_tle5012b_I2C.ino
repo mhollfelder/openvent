@@ -1,7 +1,10 @@
 #include <Tle5012b.h>
 #include <Tle5012b_reg.h>
 
+#include <Wire.h>
+
 #include "MotorController.hpp"
+#include "FlowMeter.hpp"
 
 
 #define SS    96 // P0.12
@@ -39,6 +42,8 @@ bool safety;
 
 MotorController mc;
 
+FlowMeter fm;
+
 
 typedef enum BreathingState
 {
@@ -46,6 +51,15 @@ typedef enum BreathingState
   EXHALE,
   NONE // could be used for safety variable?
 };
+
+
+typedef enum MeasuringState
+{
+  TRIGGERING,
+  WAITING,
+  READY
+};
+
 
 BreathingState state = NONE;
 uint32_t nextStep = 0, timeBase;
@@ -64,6 +78,13 @@ void setup()
   absolut_angle_bottom += absolut_angle_top;
 
   timeBase = 1000*60/resp_per_minute/(inhale+exhale);
+
+  Wire.begin();
+
+  fm.initialize();
+  fm.getOffsets();
+
+  nextStep = millis();
 }
 
 void breathingStateMachine()
@@ -121,15 +142,45 @@ void breathingStateMachine()
   }
 }
 
+MeasuringState measuringState = TRIGGERING;
+
+void measuringStateMachine()
+{
+  switch (measuringState)
+  {
+    case TRIGGERING:
+      fm.triggerMeasurements();
+      measuringState = WAITING;
+      break;
+    case WAITING:
+      if (fm.measurementsReady())
+      {
+        measuringState = READY;
+      }
+      break;
+    default:
+      // no break
+    case READY:
+      fm.readMeasurements();
+      measuringState = TRIGGERING;
+
+      // do stuff with values
+      
+      break;
+  }
+}
+
 void loop()
 {
   breathingStateMachine();   
 
   calculateAngle();
   
+  mc.loop();
+
+  measuringStateMachine();
+
   serialHandler();
-  
-  mc.move();
 }
 
 void serialHandler()

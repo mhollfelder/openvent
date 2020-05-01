@@ -19,7 +19,7 @@ public:
   MotorController();
   
 	void stateMachine(uint8_t newState);
-	void move();
+	void loop();
   uint8_t calculateState(double angle);
   void setup();
 
@@ -208,7 +208,7 @@ uint8_t MotorController::calculateState(double angle)
     return state;
 }
 
-void MotorController::move()
+void MotorController::loop()
 {
   switch (DIR)
         { case -1:
