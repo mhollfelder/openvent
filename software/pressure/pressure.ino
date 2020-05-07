@@ -1,8 +1,8 @@
 #include <Wire.h>
 
 
-#include "../common/FlowMeter.hpp"
-#include "../common/MovingAverage.hpp"
+#include "FlowMeter.hpp"
+#include "MovingAverage.hpp"
 
 FlowMeter fm;
 MovingAverage<float> pressure[2] = {2, 2}; // constructor parameter is the number of values to average

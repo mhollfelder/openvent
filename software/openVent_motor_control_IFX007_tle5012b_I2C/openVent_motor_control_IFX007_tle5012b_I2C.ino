@@ -36,6 +36,8 @@ uint32_t start_millis = 0;
 uint32_t inhale_millis;
 uint32_t exhale_millis;
 
+double soll_pressure = 800;
+
 
 bool safety;
 
@@ -78,9 +80,7 @@ void setup()
   absolut_angle_bottom += absolut_angle_top;
 
   timeBase = 1000*60/resp_per_minute/(inhale+exhale);
-
-  Wire.begin();
-
+  Wire1.begin();
   fm.initialize();
   fm.getOffsets();
 
@@ -113,7 +113,7 @@ void breathingStateMachine()
       if (safety == 0)
       {
         mc.DIR = -1;
-        mc.DutyCycle = 20;
+       // mc.DutyCycle = 40;
       
         //safety stop
         if(absolut_angle < absolut_angle_bottom)
@@ -126,7 +126,7 @@ void breathingStateMachine()
     case EXHALE:
       safety = 0;
       mc.DIR = 1;
-      mc.DutyCycle = 20;
+      mc.DutyCycle = 40;
       
       //safety stop
       if(absolut_angle > absolut_angle_top)
@@ -171,8 +171,7 @@ void measuringStateMachine()
 }
 
 void loop()
-{
-  breathingStateMachine();   
+{ breathingStateMachine();   
 
   calculateAngle();
   
@@ -180,6 +179,12 @@ void loop()
 
   measuringStateMachine();
 
+  Serial.print(soll_pressure); Serial.print("\t");
+  Serial.println(fm.m_lastPressure[0]-fm.m_offset[0]);
+  
+  mc.DutyCycle = constrain((soll_pressure + 200 - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1,0,255);
+  //oder   mc.DutyCycle = constrain((soll_pressure - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1 + 20,0,255);
+  
   serialHandler();
 }
 
@@ -191,15 +196,15 @@ void serialHandler()
         input = Serial.read();
         if(input == 43)
         {
-             mc.DutyCycle += 5;
+            soll_pressure += 50;
             Serial.print("\t");
-            Serial.println(mc.DutyCycle);
+            Serial.println(soll_pressure);
         }
         if(input == 45)
         {
-            mc.DutyCycle -= 5;
+            soll_pressure -= 50;
             Serial.print("\t");
-            Serial.println(mc.DutyCycle);
+            Serial.println(soll_pressure);
         }
     }
 }
