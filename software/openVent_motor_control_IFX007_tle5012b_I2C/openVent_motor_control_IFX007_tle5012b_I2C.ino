@@ -8,6 +8,7 @@ ArduinoI2c i2c1(1);
 
 #include "MotorController.hpp"
 #include "FlowMeter.hpp"
+#include "Pid.hpp"
 
 
 #define SS    96 // P0.12
@@ -39,11 +40,12 @@ uint32_t start_millis = 0;
 uint32_t inhale_millis;
 uint32_t exhale_millis;
 
-double soll_pressure = 800;
+float soll_pressure = 800;
 
 
 bool safety;
 
+Pid<float> reg(0.1, 0, 0, 255, soll_pressure + 200);
 
 MotorController mc;
 
@@ -82,11 +84,11 @@ void setup()
   absolut_angle_top = Nullpunkt;
   absolut_angle_bottom += absolut_angle_top;
 
-  timeBase = 1000*60/resp_per_minute/(inhale+exhale);
   Wire1.begin();
   fm.initialize();
   fm.getOffsets();
 
+  timeBase = 1000*60/resp_per_minute/(inhale+exhale);
   nextStep = millis();
 }
 
@@ -174,7 +176,8 @@ void measuringStateMachine()
 }
 
 void loop()
-{ breathingStateMachine();   
+{ 
+  breathingStateMachine();   
 
   calculateAngle();
   
@@ -182,11 +185,14 @@ void loop()
 
   measuringStateMachine();
 
+  const auto val = fm.m_lastPressure[0] - fm.m_offset[0];
+
   Serial.print(soll_pressure); Serial.print("\t");
-  Serial.println(fm.m_lastPressure[0]-fm.m_offset[0]);
-  
-  mc.DutyCycle = constrain((soll_pressure + 200 - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1 , 0, 255);
-  //oder   mc.DutyCycle = constrain((soll_pressure - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1 + 20,0,255);
+  Serial.println(val);
+
+  reg.update(val);
+    
+  mc.DutyCycle = reg;
   
   serialHandler();
 }
@@ -200,12 +206,14 @@ void serialHandler()
         if(input == 43)
         {
             soll_pressure += 50;
+            reg.changeSetPoint(soll_pressure + 200);
             Serial.print("\t");
             Serial.println(soll_pressure);
         }
         if(input == 45)
         {
             soll_pressure -= 50;
+            reg.changeSetPoint(soll_pressure + 200);
             Serial.print("\t");
             Serial.println(soll_pressure);
         }
