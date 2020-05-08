@@ -169,8 +169,11 @@ void measuringStateMachine()
       fm.readMeasurements();
       measuringState = TRIGGERING;
 
-      // do stuff with values
-      
+      const auto val = fm.m_lastPressure[0] - fm.m_offset[0];
+      Serial.println(val);
+    
+      reg.update(val);    
+      mc.DutyCycle = reg;
       break;
   }
 }
@@ -184,15 +187,6 @@ void loop()
   mc.loop();
 
   measuringStateMachine();
-
-  const auto val = fm.m_lastPressure[0] - fm.m_offset[0];
-
-  Serial.print(soll_pressure); Serial.print("\t");
-  Serial.println(val);
-
-  reg.update(val);
-    
-  mc.DutyCycle = reg;
   
   serialHandler();
 }
