@@ -3,6 +3,9 @@
 
 #include <Wire.h>
 
+#include <Platform.h>
+ArduinoI2c i2c1(1);
+
 #include "MotorController.hpp"
 #include "FlowMeter.hpp"
 
@@ -44,7 +47,7 @@ bool safety;
 
 MotorController mc;
 
-FlowMeter fm;
+FlowMeter fm(&i2c1);
 
 
 typedef enum BreathingState
@@ -182,7 +185,7 @@ void loop()
   Serial.print(soll_pressure); Serial.print("\t");
   Serial.println(fm.m_lastPressure[0]-fm.m_offset[0]);
   
-  mc.DutyCycle = constrain((soll_pressure + 200 - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1,0,255);
+  mc.DutyCycle = constrain((soll_pressure + 200 - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1 , 0, 255);
   //oder   mc.DutyCycle = constrain((soll_pressure - (fm.m_lastPressure[0]-fm.m_offset[0])) * 0.1 + 20,0,255);
   
   serialHandler();

@@ -1,4 +1,4 @@
-
+ 
 #include <PressureSensorDPS310.h>
 
 
@@ -6,9 +6,9 @@ class FlowMeter
 {
   public:
 
-  FlowMeter() :
-    m_sensor0(0x77),
-    m_sensor1(0x76)
+  FlowMeter(II2c* i2c = defaultII2c) :
+    m_sensor0(0x77, i2c),
+    m_sensor1(0x76, i2c)
   {
   }
   
