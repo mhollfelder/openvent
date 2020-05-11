@@ -50,7 +50,7 @@ Pid<float> reg(0.1, 0, 0, 255, soll_pressure + 200);
 MotorController mc;
 
 FlowMeter fm(&i2c1);
-
+float volume;
 
 typedef enum BreathingState
 {
@@ -86,7 +86,6 @@ void setup()
 
   Wire1.begin();
   fm.initialize();
-  fm.getOffsets();
 
   timeBase = 1000*60/resp_per_minute/(inhale+exhale);
   nextStep = millis();
@@ -167,14 +166,16 @@ void measuringStateMachine()
       // no break
     case READY:
       fm.readMeasurements();
-      measuringState = TRIGGERING;
 
-      const auto val = fm.m_lastPressure[0] - fm.m_offset[0];
-      Serial.println(val);
-    
-      reg.update(val);    
+      const auto pressure = fm.m_lastPressure[0] - fm.m_offset[0];
+      reg.update(pressure);
       mc.DutyCycle = reg;
-      break;
+
+      volume += fm.calculateVolumeDelta();
+      Serial.println(volume);
+
+      measuringState = TRIGGERING;
+    break;
   }
 }
 
