@@ -45,7 +45,7 @@ float soll_pressure = 800;
 
 bool safety;
 
-Pid<float> reg(0.1, 0, 0, 255, soll_pressure + 200);
+Pid<float> reg(0.1, 0, 0, 255, 0, soll_pressure + 200);
 
 MotorController mc;
 
