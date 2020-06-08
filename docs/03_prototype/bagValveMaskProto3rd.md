@@ -83,7 +83,7 @@ First tests were carried out with different settings.
 
 Here, you can find the video:
 
-<a href="https://youtu.be/1XlCXz6gViw"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
+<a href="https://youtu.be/1XlCXz6gViw"><img src="https://img.youtube.com/vi/1XlCXz6gViw/0.jpg" width="250px"></a>
 
 ### Second test
 
@@ -99,7 +99,7 @@ Here, you can find the video:
 
 Here, you can find the video:
 
-<a href="https://youtu.be/1XlCXz6gViw?t=83"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
+<a href="https://youtu.be/1XlCXz6gViw?t=83"><img src="https://img.youtube.com/vi/1XlCXz6gViw/0.jpg" width="250px"></a>
 
 ### Third test
 
@@ -115,7 +115,7 @@ Here, you can find the video:
 
 Here, you can find the video:
 
-<a href="https://youtu.be/1XlCXz6gViw?t=163"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
+<a href="https://youtu.be/1XlCXz6gViw?t=163"><img src="https://img.youtube.com/vi/1XlCXz6gViw/0.jpg" width="250px"></a>
 
 ## Software and hardware setup
 
@@ -169,7 +169,7 @@ The official software can be found [here](https://www.infineon.com/cms/en/produc
 
 ## Status
 
-:start:
+:rocket:
 
 * [ ] INACTIVE
 * [X] ACTIVE
