@@ -4,7 +4,7 @@ Please check the status of the prototype [here](#status).
 
 ## Introduction
 
-The second prototype is the logical development of the first [prototype](./prototype1st.md).\
+The second prototype is the logical development of the first [prototype](./bagValveMaskProto1st.md).\
 It is an extension of the first prototype with two pushing levers.
 
 A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here](https://www.youtube.com/watch?v=z1eN3fDKDu0).
@@ -13,7 +13,7 @@ A video summarizing the testing of this prototype can be found on our YouTube ch
 
 ## Idea
 
-The basic idea of this prototype continues with the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it, similar as the first prototype [here](./prototype1st.md).\
+The basic idea of this prototype continues with the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it, similar as the first prototype [here](./bagValveMaskProto1st.md).\
 A bag valve mask gets squeezed between two tilting levers (similar to a lift bridge).\ 
 Two belts attached to the top of each lever end on one lever and are looped around the opposite side lever.\ 
 During compression, these belts get winded up by a motor to pull the levers together and relaxation is driven by the bag valve mask itself.\
@@ -57,7 +57,7 @@ Relaxation of the compressed object will un-wind the wire and relax the whole se
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2ndprototype/v2_assembled_test_compressed.jpeg" height="250px">
 </p>
 
-The core advantage compared to the first [prototype](./prototype1st.md) is that the compression is done with two cylinders from the side.\
+The core advantage compared to the first [prototype](./bagValveMaskProto1st.md) is that the compression is done with two cylinders from the side.\
 This solves the problem that the belt of the first prototype was symmetrically wrapped around the bag valve mask.\
 This introduced additional friction and forces as the bag was symmetrically compressed. Here, the cylinders push from the side with small surfaces only.
 
@@ -69,7 +69,7 @@ Here, you can find the video:
 
 ## Software and hardware setup
 
-A simple software driver for Arduino controlling a stepper motor driver has been used similar as for the first [prototype](./prototype1st.md).\
+A simple software driver for Arduino controlling a stepper motor driver has been used similar as for the first [prototype](./bagValveMaskProto1st.md).\
 Such example sketches can be easily found on the Internet, e.g. here:
 
 * [Easy Driver Examples](https://www.schmalzhaus.com/EasyDriver/Examples/EasyDriverExamples.html)
@@ -128,4 +128,4 @@ It is a potential candidate for further evaluation and improvements.\
 
 ## Related prototypes
 
-The predecessor is the first prototype which can be found [here](./prototype1st.md).
+The predecessor is the first prototype which can be found [here](./bagValveMaskProto1st.md).

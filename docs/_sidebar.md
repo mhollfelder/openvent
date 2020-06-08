@@ -9,11 +9,11 @@
 
 * Prototype
   * [Overview](03_prototype/README.md)
-  * [Prototype V1](03_prototype/prototype1st.md)
-  * [Prototype V2](03_prototype/prototype2nd.md)
+  * [Prototype V1](03_prototype/bagValveMaskProto1st.md)
+  * [Prototype V2](03_prototype/bagValveMaskProto2nd.md)
+  * [Prototype V3](03_prototype/bagValveMaskProto3rd.md)
   * [Flowmeter](03_prototype/flowmeter.md)
   * [CPAP](03_prototype/cpapPrototype.md)
-  * [Latest](03_prototype/latest.md)
 
 * Knowledge Hub
   * [Overview](04_knowledge/README.md)

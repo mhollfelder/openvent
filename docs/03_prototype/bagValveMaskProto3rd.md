@@ -14,7 +14,7 @@ A video summarizing showing this prototype can be found on our YouTube channel O
 ## Idea
 
 The basic idea of this prototype sticks to the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask).
-In combination with a mechanical setup to compress it efficiently, it is derived from the first prototype [here](./prototype1st.md).
+In combination with a mechanical setup to compress it efficiently, it is derived from the first prototype [here](./bagValveMaskProto1st.md).
 
 A bag valve mask gets squeezed between the frame and one tilting lever (similar to a lift bridge) with one side attached to the frame.\
 The other side is pulled down by a belt that is winded up by a motor.\ 
@@ -65,7 +65,7 @@ The assembled real-life prototype is illustrated here:
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_assembled_test_compressed.jpeg" height="250px">
 </p>
 
-The core advantage compared to the first two prototypes [one](./prototype1st.md) and [two](./prototype2nd.md) is that the compression is mechanically well designed for the bag valve mask. This design solves various pitfalls of the first two prototypes.
+The core advantage compared to the first two prototypes [one](./bagValveMaskProto1st.md) and [two](./bagValveMaskProto2nd.md) is that the compression is mechanically well designed for the bag valve mask. This design solves various pitfalls of the first two prototypes.
 
 First tests were carried out with different settings.
 
@@ -119,7 +119,7 @@ Here, you can find the video:
 
 ## Software and hardware setup
 
-A simple software driver for Arduino controlling a stepper motor driver has been used similar as for the first [prototype](./prototype1st.md).\
+A simple software driver for Arduino controlling a stepper motor driver has been used similar as for the first [prototype](./bagValveMaskProto1st.md).\
 Such example sketches can be easily found on the Internet, e.g. here:
 
 * [Easy Driver Examples](https://www.schmalzhaus.com/EasyDriver/Examples/EasyDriverExamples.html)
@@ -179,4 +179,4 @@ It is a potential candidate for further evaluation and improvements.\
 
 ## Related prototypes
 
-The predecessor is the first prototype which can be found here with [one](./prototype1st.md) and [two](./prototype2nd.md).
+The predecessor is the first prototype which can be found here with [one](./bagValveMaskProto1st.md) and [two](./bagValveMaskProto2nd.md).

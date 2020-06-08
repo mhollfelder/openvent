@@ -6,9 +6,9 @@
 
 Currently, we have the following prototypes developed and documented:
 
-* [Latest](./latest.md)
-* [Second Prototype](./prototype2nd.md)
-* [First Prototype](./prototype1st.md)
+* [Latest](./bagValveMaskProto3rd.md)
+* [Second Prototype](./bagValveMaskProto2nd.md)
+* [First Prototype](./bagValveMaskProto1st.md)
 
 The latest prototype becomes part of the history once a new one is started or has been finished.\
 Feel free to contribute here by forking our repository and start developing.\
