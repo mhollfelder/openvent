@@ -5,15 +5,17 @@ Please check the status of the prototype [here](#status).
 ## Introduction
 
 The third prototype is merging the condensed learnings of the first two [prototypes](./README.md).\
-In a nutshell, it is mainly an extension of the first prototype with one tilting lever that is pulled to squeeze the bag valve mask.
+In a nutshell, it is overall an extension of the first prototype with one tilting lever that is pulled to squeeze the bag valve mask.
 
-A video summarizing the testing of this prototype can be found on our YouTube channel OpenVent [here]().
+A video summarizing showing this prototype can be found on our YouTube channel OpenVent [here](https://www.youtube.com/watch?v=tE5zFFq62-0).
 
-<a href="https://www.youtube.com/watch?v=z1eN3fDKDu0"><img src="https://img.youtube.com/vi/z1eN3fDKDu0/0.jpg" width="300px"></a>
+<a href="https://www.youtube.com/watch?v=tE5zFFq62-0"><img src="https://img.youtube.com/vi/tE5zFFq62-0/0.jpg" width="300px"></a>
 
 ## Idea
 
-The basic idea of this prototype sticks still to the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask) in combination with a mechanical setup to compress it, similar as the first prototype [here](./prototype1st.md).\
+The basic idea of this prototype sticks to the [bag valve mask](https://en.wikipedia.org/wiki/Bag_valve_mask).
+In combination with a mechanical setup to compress it efficiently, it is derived from the first prototype [here](./prototype1st.md).
+
 A bag valve mask gets squeezed between the frame and one tilting lever (similar to a lift bridge) with one side attached to the frame.\
 The other side is pulled down by a belt that is winded up by a motor.\ 
 During compression, the belt get winded up by a motor to pull the lever bridge down and relaxation is driven by the bag valve mask itself.\
@@ -28,9 +30,12 @@ The basic folder structure is as follows:
 ```console
 01_secondPrototype/
 ┣ 01_frame/         # The frame as an outline of the prototype
-┣ 02_axis/          # Different motor axis for connecting the motor
+┣ 02_axis/          # Motor axis for connecting the motor
 ┗ 03_tilt/          # The tilt with the lever and cylinders
 ```
+
+The motor axis is the same one as for the second prototype [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/01_secondPrototype/02_axis).\
+Moreover, the axis of the first prototype can be used as well and they are stored [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/00_firstPrototype/02_axis).
 
 We have uploaded the `.stl` files of the initial prototype to the repository in the respective `mechanics/stable` branch.\
 If you modify them or use them for additional testing, feel free to create a branch in your repository and work with those files.\
@@ -43,28 +48,74 @@ The design files are illustrated in the section [Mechanical and hardware setup](
 The mechanical design and setup is illustrated here:
 
 <p>
-  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/2rdprototype/v3_design_explosion.jpeg" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_design_explosion.jpeg" height="200px">
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_design_assembled.jpeg" height="200px">
 </p>
 
-As you can see above, the motor is directly connected to the axis without any transmission.\
-Moreover, the axis holds the wires which is getting wrapped around it when the motor starts.\
-Relaxation of the compressed object will un-wind the wire and relax the whole setup. The assembled real-life prototype is illustrated here:
+As you can see above, the motor is directly connected to the axis without any transmission, `.stl` is stored [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/02_thirdPrototype/02_axis).\
+Moreover, the axis holds the belt which is getting wrapped around it when the motor starts. The other side of the belt is mounted directly to the frame whose `.stl` files are stored in the `01_frame` folder [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/02_thirdPrototype/01_frame).\
+The tilt lever is consisting of two identical side levers `v3_4_vertical_arm.stl` which can be found [here](https://github.com/mhollfelder/openvent/tree/mechanics/stable/mechanics/00_prototypes/02_thirdPrototype/03_tilt) and a top lever which can be found there as well.\
+Additionally, one punch block `v3_1_punch_block.stl` can be found there as well which should be mounted to the top lever to enhance compression of the bag.\
+Relaxation of the compressed object will un-wind the wire and relax the whole setup. 
+
+The assembled real-life prototype is illustrated here:
 
 <p>
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_assembled_test_relaxed.jpeg" height="250px">
   <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/3rdprototype/v3_assembled_test_compressed.jpeg" height="250px">
 </p>
 
-The core advantage compared to the first [prototype](./prototype1st.md) is that the compression is done with two cylinders from the side.\
-This solves the problem that the belt of the first prototype was symmetrically wrapped around the bag valve mask.\
-This introduced additional friction and forces as the bag was symmetrically compressed. Here, the cylinders push from the side with small surfaces only.
+The core advantage compared to the first two prototypes [one](./prototype1st.md) and [two](./prototype2nd.md) is that the compression is mechanically well designed for the bag valve mask. This design solves various pitfalls of the first two prototypes.
 
-For a first test with, one NEMA-17 stepper motor was used again and it was able to compress the bag efficiently.
+First tests were carried out with different settings.
+
+### First test
+
+* Full load with closed pipe of bag (overpressure value `60 cmH2O`)
+* `25 cycles/min` 
+* Ratio 1:1 
+* NEMA-17 
+* 12 V 
+* 2.5 A 
+* Halfstep 
+* Frequency of `750 1/min` 
+* Travel of `900 k`
 
 Here, you can find the video:
 
-<a href="https://www.youtube.com/watch?v=z1eN3fDKDu0"><img src="https://img.youtube.com/vi/z1eN3fDKDu0/0.jpg" width="250px"></a>
+<a href="https://youtu.be/1XlCXz6gViw"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
+
+### Second test
+
+* No load with open pipe of bag
+* `18 cycles/min` 
+* Ratio 1:4 
+* NEMA-17
+* 8 V
+* 2.8 A 
+* Halfstep 
+* Frequency of `750 1/min` 
+* Travel of `900 k`
+
+Here, you can find the video:
+
+<a href="https://youtu.be/1XlCXz6gViw?t=83"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
+
+### Third test
+
+* Full load with narrow pipe of bag (overpressure value up to `60 cmH2O`)
+* `49 cycles/min` 
+* Ratio 1:1 
+* NEMA-23
+* 12 V
+* 2.8 A 
+* Halfstep 
+* Frequency of `1400 1/min` 
+* Travel of `900 k`
+
+Here, you can find the video:
+
+<a href="https://youtu.be/1XlCXz6gViw?t=163"><img src="https://youtu.be/1XlCXz6gViw/0.jpg" width="250px"></a>
 
 ## Software and hardware setup
 
@@ -86,9 +137,10 @@ The official software can be found [here](https://www.infineon.com/cms/en/produc
 
 ### Mechanics
 
-* 2-piece printed frame (motor-side and backside) 
-* 2-piece rotor for motor shaft
-* 2 levers
+* 2 piece printed frame (motor-side and backside) 
+* 1 piece tilting bridge top
+* 2 side levers
+* Punch block
 * Belt/smooth rope 
 * NEMA-17 or NEMA-23 stepper motor
 
@@ -104,7 +156,7 @@ The official software can be found [here](https://www.infineon.com/cms/en/produc
 
 * Quite simple design 
 * Highly effective and robust
-* well printable
+* Well printable
 * Low friction losses in the mechanics itself 
 * Pulley-looping of the belt easily possible
 * Cylinder compress bag valve mask efficiently
@@ -112,8 +164,8 @@ The official software can be found [here](https://www.infineon.com/cms/en/produc
 ### Disadvantages
 
 * Friction of optional pulley 
-  * works against torque maximization
-  * against the achievable max. ventilation frequency 
+  * Works against torque maximization
+  * Works against the achievable max. ventilation frequency 
 
 ## Status
 
@@ -127,4 +179,4 @@ It is a potential candidate for further evaluation and improvements.\
 
 ## Related prototypes
 
-The predecessor is the first prototype which can be found [here](./prototype1st.md).
+The predecessor is the first prototype which can be found here with [one](./prototype1st.md) and [two](./prototype2nd.md).
