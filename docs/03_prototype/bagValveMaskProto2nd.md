@@ -1,4 +1,4 @@
-# Second prototype
+# Second bag valve mask prototype
 
 Please check the status of the prototype [here](#status).
 
