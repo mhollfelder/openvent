@@ -64,7 +64,7 @@ Right now, a prototype is in development with a bag valve mask, a 3D printed fix
 The prototype is tested and in an iterative, agile approach improved to provide a simple design.\
 We are right now uploading the designs and design files for next steps and testing.
 
-The latest prototype can be found in the folder `docs/06_prototype`.
+The latest prototype can be found in the folder `docs/03_prototype`.
 
 ## Development branches
 
@@ -110,4 +110,4 @@ Additionally, please get in contact with us via contact.openvent@gmail.com for m
 
 ## Similar projects
 
-We will provide a list of similar projects in the `docs/07_knowledge` folder soon.
+We will provide a list of similar projects in the `docs/04_knowledge` folder soon.

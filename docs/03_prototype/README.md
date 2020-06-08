@@ -28,4 +28,4 @@ The prototypes typically consist of the following elements as part of this repos
 * Documentation
 
 The documentation here plus the overview of the prototypes is the first source for prototype specific information.\
-The `concept` documentation and the respective `mechanics`, `software`, and `hardware` folders of the documentation hold the respective documentation valid on an abstracter level as the prototypes are.
+The `concept` documentation and the respective `mechanics`, `software`, and `hardware` parts of the documentation hold the respective documentation valid on an abstracter level as the prototypes are.

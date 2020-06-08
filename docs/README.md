@@ -24,8 +24,8 @@ docs/
 ┣ 03_hardware/      // The hardware documentation
 ┣ 04_software/      // All software related documentation
 ┣ 05_mechanics/     // Documentation of the mechanical design
-┣ 06_prototype/     // Documentation of prototypes
-┣ 07_knowledge/     // The knowledge hub around this topic
+┣ 03_prototype/     // Documentation of prototypes
+┣ 04_knowledge/     // The knowledge hub around this topic
 ┣ 08_development/   // The overall development flow
 ┣ _sidebar.md       // The sidebar for Docsify
 ┣ .gitkeep          // Keep this folder tracked in Git even if it is empty   
@@ -69,7 +69,7 @@ Right now, a prototype is in development with a bag valve mask, a 3D printed fix
 The prototype is tested and in an iterative, agile approach improved to provide a simple design.\
 We are right now uploading the designs and design files for next steps and testing.
 
-The latest prototype can be found in the folder `docs/06_prototype`.
+The latest prototype can be found in the folder `docs/03_prototype`.
 
 ## Development branches
 
@@ -115,4 +115,4 @@ Additionally, please get in contact with us via contact.openvent@gmail.com for m
 
 ## Similar projects
 
-We will provide a list of similar projects in the `docs/07_knowledge` folder soon.
+We will provide a list of similar projects in the `docs/04_knowledge` folder soon.
