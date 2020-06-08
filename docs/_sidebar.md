@@ -18,6 +18,7 @@
 * Knowledge Hub
   * [Overview](04_knowledge/README.md)
   * [Existing Concepts](04_knowledge/existingConcepts.md)
+  * [Medical Background](04_knowledge/medicalConcept.md)
   * [Knowledge Hub](04_knowledge/knowledgeHub.md)
   * [Other Projects](04_knowledge/otherProjects.md)
 
