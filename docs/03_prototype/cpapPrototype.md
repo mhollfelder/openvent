@@ -10,7 +10,7 @@ issuing EUAs for fighting Covid-19, among which are CPAP machines [link](https:/
 
 
 <p>
-  <img src="https://raw.githubusercontent.com//mhollfelder/openvent/tree/assets/docs/assets/cpapConcept/OpenVent_CPAP_Concept.png" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/cpapConcept/OpenVent_CPAP_Concept.png" height="200px">
 <p>
 
 A video summarizing showing this prototype can be found on our YouTube channel OpenVent
@@ -26,7 +26,7 @@ For more details on the concept, please refer to the concept section [link](../0
 
 ## Mechanical and hardware setup
 <p>
-  <img src="https://raw.githubusercontent.com//mhollfelder/openvent/tree/assets/docs/assets/prototypes/OpenVent_CPAP_Setup.png" height="200px">
+  <img src="https://raw.githubusercontent.com/mhollfelder/openvent/assets/docs/assets/prototypes/OpenVent_CPAP_Setup.png" height="200px">
 <p>
 
 
