@@ -9,6 +9,10 @@ During the Covid-19 pandemic, the [link](https://www.fda.gov/news-events/press-a
 issuing EUAs for fighting Covid-19, among which are CPAP machines [link](https://www.fda.gov/media/136702/download).
 
 
+<p>
+  <img src="https://raw.githubusercontent.com//mhollfelder/openvent/tree/assets/docs/assets/cpapConcept/OpenVent_CPAP_Concept.png" height="200px">
+<p>
+
 A video summarizing showing this prototype can be found on our YouTube channel OpenVent
 [link coming soon]
 
@@ -21,6 +25,9 @@ For more details on the concept, please refer to the concept section [link](../0
 ## Design files
 
 ## Mechanical and hardware setup
+<p>
+  <img src="https://raw.githubusercontent.com//mhollfelder/openvent/tree/assets/docs/assets/prototypes/OpenVent_CPAP_Setup.png" height="200px">
+<p>
 
 
 ## Status
